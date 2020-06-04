@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+      format_sql: true
+      dialect: org.hibernate.dialect.SQLServer2014Dialect
+  datasource:
+    url: jdbc:sqlserver://192.168.1.10\\MEDINASQL;databaseName=_¬–¿◊≈¡Õ¿ﬂ œ–¿ “» ¿_
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: user
+    password: prolog0580
+  show-sql: true
