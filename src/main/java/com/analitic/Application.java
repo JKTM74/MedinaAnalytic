@@ -1,6 +1,8 @@
 package com.analitic;
 
+import com.analitic.models.Service;
 import com.analitic.repositories.ServiceRepository;
+import com.analitic.repositories.UserRepository;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 @SpringBootApplication(scanBasePackages = {"com.analitic"})
 @EntityScan("com.analitic.models")
@@ -19,20 +22,17 @@ import java.util.Date;
 public class Application {
 
     private static ServiceRepository serviceRepository = null;
+    private static UserRepository userRepository = null;
 
-    public Application(ServiceRepository serviceRepository) {
+    public Application(ServiceRepository service, UserRepository userRepository) {
         Application.serviceRepository = serviceRepository;
+        Application.userRepository = userRepository;
     }
 
     public static void main(String[] args) throws IOException {
         SpringApplication.run(Application.class, args);
+        //userRepository.findUsersByDepartment(1);
         //writeIntoExcel("C:\\ExcelFile\\test.xls");
-        someShit();
-    }
-
-    public static void someShit(){
-        String patient = serviceRepository.findPatientById(38930);
-        System.out.println(patient);
     }
 
     @SuppressWarnings("deprecation")

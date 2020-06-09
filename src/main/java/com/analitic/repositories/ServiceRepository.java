@@ -6,13 +6,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Table;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Repository
-@Table(name = "qdfSalesServices")
 public interface ServiceRepository extends JpaRepository<Service, UUID> {
-    @Query(value = "Select TOP 1 PatientCalc from qdfSalesServices WHERE PatientID = :PatientID", nativeQuery = true)
-    String findPatientById(@Param("PatientID") int patientID);
+
+    @Query(value = "SELECT SUM(price) FROM qdfSelesToUsers WHERE doctor like :user + '%' AND Course = 0 AND FORMAT(SurveyDate, 'MM-yyyy') = :date", nativeQuery = true)
+    Double getSumByUserAndDateWithoutCourse(@Param("user") String user, @Param("date") String date);
+
+    @Query(value = "SELECT SUM(price) FROM qdfSelesToUsers WHERE napr like :user + '%' AND Course = 1 AND FORMAT(SurveyDate, 'MM-yyyy') = :date", nativeQuery = true)
+    Double getSumByUserAndDateWithCourse(@Param("user") String user, @Param("date") String date);
 }
