@@ -1,4 +1,4 @@
-package com.analitic;
+package com.analitic.services;
 
 import com.analitic.models.User;
 import com.analitic.repositories.ServiceRepository;

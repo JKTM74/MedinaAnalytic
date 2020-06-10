@@ -1,34 +1,32 @@
 package com.analitic.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor @AllArgsConstructor @Getter @Setter
 public class User {
+
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "userfullname")
-    String userFullName;
+    private String userFullName;
 
     @Column(name = "title")
-    String title;
+    private String specialty;
 
     @Column(name = "otdel")
-    String department;
+    private String department;
 
     @Override
     public String toString() {
         return "User{" +
                 "userFullName='" + userFullName + '\'' +
-                ", title='" + title + '\'' +
+                ", title='" + specialty + '\'' +
                 ", department=" + department +
                 '}';
     }
