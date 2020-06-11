@@ -1,6 +1,5 @@
 package com.analitic;
 
-import com.analitic.models.Service;
 import com.analitic.repositories.ServiceRepository;
 import com.analitic.repositories.UserRepository;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -14,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 
 @SpringBootApplication(scanBasePackages = {"com.analitic"})
 @EntityScan("com.analitic.models")
