@@ -39,7 +39,6 @@ public class Main {
         department.forEach(this::departmentAnalyse);
 
 
-
         List<User> users = userRepository.findUsersByDepartment(1);
         HashMap<String, Double> usersSum = new HashMap<>();
 
@@ -61,16 +60,26 @@ public class Main {
         }
     }
 
-    private void departmentAnalyse(Department department)  {
-        SheetConnector sheetConnector = null;
+    private void departmentAnalyse(Department department) {
+
         try {
-            sheetConnector = new SheetConnector(department.getNumber());
+            SheetConnector sheetConnector = new SheetConnector(department.getNumber());
+
+            department.setSpecialtiesFromExcel(sheetConnector.getSpecialtiesFromExcel());
+
+            department.setUsers(userRepository.findUsersByDepartment(department.getNumber()));
+
+
         } catch (IOException | InvalidFormatException e) {
             e.printStackTrace();
         }
-
-        List<String> spec = sheetConnector.getSpecialities();
-
-        spec.forEach(System.out::println);
     }
 }
+
+/*TODO: * Сделать ENUM для ассоциаций юзеров по специальностям которых не ясно куда отнести относительно шита.
+        * Написать методы и запросы для сбора аналитики из БД по каждому отделению.
+        * Написать методы для формирования строк в шитах и вбросах этих строк.
+        * Придумать как запускать файл не по расписанию, а по кнопке из МИСа и собирать аналитику по дате которую выберет пользователь.
+        * Реализовать настройку через конфиг.
+        * Хорошо было бы добавить логирование.
+*/
