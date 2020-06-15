@@ -1,11 +1,13 @@
 package com.analitic.services;
 
+import com.analitic.Enums.SpecialitiesEnum;
 import com.analitic.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,7 +22,7 @@ public class Department {
 
     public void setSpecialtiesFromExcel(Map<String, Integer> specialties) {
         this.specialties = specialties.entrySet().stream()
-                .filter(s -> !s.getKey().substring(0, 2).equals("Д "))
+                .filter(s -> !s.getKey().startsWith("Д "))
                 .map(s ->
                         Speciality.builder()
                                 .sheetNumber(s.getValue())
@@ -29,17 +31,30 @@ public class Department {
                 .collect(Collectors.toList());
     }
 
-    public void associateUsersWithSpecialties(){
+    public void connectUserToSpeciality(){
         for (User user: users){
-            boolean isAssociated = false;
+            boolean connected = false;
             for (Speciality speciality: specialties){
-                if (speciality.getName().toLowerCase().contains(user.getSpecialty().toLowerCase()) && !isAssociated){
+                if (speciality.getName().toLowerCase().contains(user.getSpecialty().toLowerCase()) && !connected){
                     speciality.addUser(user);
-                    isAssociated = true;
+                    connected = true;
                 }
             }
-            if (!isAssociated){
+            if (!connected){
+                for (SpecialitiesEnum specialtyEnum: EnumSet.allOf(SpecialitiesEnum.class)){
+                    if (specialtyEnum.anySpecialtyNames.contains(user.getSpecialty()) && !connected){
+                        Speciality speciality = specialties.stream()
+                                .filter(s -> s.getName().equals(specialtyEnum.name))
+                                .findAny()
+                                .orElse(null);
+                        connected= true;
+                        if (speciality != null){
+                            speciality.addUser(user);
+                        }
+                    }
+                }
             }
+            if (!connected) System.out.println(user.getUserFullName() + " не смог подобрать специальность");
         }
     }
 }

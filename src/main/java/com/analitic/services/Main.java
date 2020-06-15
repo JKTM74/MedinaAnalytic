@@ -13,7 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,9 +54,9 @@ public class Main {
             usersSum.put(user.getUserFullName(), allSum);
         }
 
-        for (Map.Entry entry : usersSum.entrySet()) {
+        /*for (Map.Entry entry : usersSum.entrySet()) {
             System.out.println(entry.getKey() + " - " + entry.getValue());
-        }
+        }*/
     }
 
     private void departmentAnalyse(Department department) {
@@ -69,7 +68,14 @@ public class Main {
 
             department.setUsers(userRepository.findUsersByDepartment(department.getNumber()));
 
+            department.connectUserToSpeciality();
 
+            for (Speciality speciality: department.getSpecialties()){
+                if (speciality.getUsers() != null)
+                    for (User user: speciality.getUsers()){
+                        System.out.println(user.getUserFullName() + " - " + speciality.getName());
+                    }
+            }
         } catch (IOException | InvalidFormatException e) {
             e.printStackTrace();
         }

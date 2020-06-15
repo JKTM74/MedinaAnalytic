@@ -13,9 +13,13 @@ public class Speciality {
 
     private String name;
 
-    private List<User> users = new ArrayList<>();
+    private List<User> users;
+
 
     public void addUser(User user){
+        if(users == null){
+            users = new ArrayList<>();
+        }
         users.add(user);
     }
 
