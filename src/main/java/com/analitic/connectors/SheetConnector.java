@@ -15,7 +15,7 @@ import java.util.Map;
 public class SheetConnector {
     private final String filePath = "\\\\192.168.1.10\\Server\\Общие папки\\Автоматизация\\Анализ направлений\\Новая аналитика тест\\"; //TODO: вынести в конфиг
 
-    private Workbook workbook;
+    private final Workbook workbook;
 
     public SheetConnector(int number) throws IOException, InvalidFormatException {
         workbook = WorkbookFactory.create(new File(filePath + "ВП " + number + " отделение.xlsx"));

@@ -1,6 +1,6 @@
 package com.analitic;
 
-import com.analitic.repositories.ServiceRepository;
+import com.analitic.repositories.SalesServicesRepository;
 import com.analitic.repositories.UserRepository;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
@@ -19,11 +19,11 @@ import java.util.Date;
 @EnableJpaRepositories("com.analitic.repositories")
 public class Application {
 
-    private static ServiceRepository serviceRepository = null;
+    private static SalesServicesRepository salesServicesRepository = null;
     private static UserRepository userRepository = null;
 
-    public Application(ServiceRepository service, UserRepository userRepository) {
-        Application.serviceRepository = serviceRepository;
+    public Application(SalesServicesRepository service, UserRepository userRepository) {
+        Application.salesServicesRepository = salesServicesRepository;
         Application.userRepository = userRepository;
     }
 

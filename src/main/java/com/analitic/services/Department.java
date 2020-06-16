@@ -12,49 +12,57 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Setter @Getter @AllArgsConstructor @Builder
+@Setter
+@Getter
+@AllArgsConstructor
+@Builder
 public class Department {
     private int number;
 
     private List<User> users;
 
-    private List <Speciality> specialties;
+    private List<Specialty> specialties;
 
     public void setSpecialtiesFromExcel(Map<String, Integer> specialties) {
         this.specialties = specialties.entrySet().stream()
-                .filter(s -> !s.getKey().startsWith("Д "))
+                .filter(s -> !s.getKey().startsWith("Д ")
+                        && !s.getKey().toLowerCase().contains("свод"))
                 .map(s ->
-                        Speciality.builder()
+                        Specialty.builder()
                                 .sheetNumber(s.getValue())
                                 .name(s.getKey())
                                 .build())
                 .collect(Collectors.toList());
     }
 
-    public void connectUserToSpeciality(){
-        for (User user: users){
+    public void connectUserToSpeciality() {
+        for (User user : users) {
             boolean connected = false;
-            for (Speciality speciality: specialties){
-                if (speciality.getName().toLowerCase().contains(user.getSpecialty().toLowerCase()) && !connected){
-                    speciality.addUser(user);
+            for (Specialty specialty : specialties) {
+                if (specialty.getName().toLowerCase().contains(user.getSpecialty().toLowerCase()) && !connected) {
+                    specialty.addUser(user);
                     connected = true;
                 }
             }
-            if (!connected){
-                for (SpecialitiesEnum specialtyEnum: EnumSet.allOf(SpecialitiesEnum.class)){
-                    if (specialtyEnum.anySpecialtyNames.contains(user.getSpecialty()) && !connected){
-                        Speciality speciality = specialties.stream()
+            if (!connected) {
+                for (SpecialitiesEnum specialtyEnum : EnumSet.allOf(SpecialitiesEnum.class)) {
+                    if (specialtyEnum.anySpecialtyNames.contains(user.getSpecialty()) && !connected) {
+                        Specialty specialty = specialties.stream()
                                 .filter(s -> s.getName().equals(specialtyEnum.name))
                                 .findAny()
                                 .orElse(null);
-                        connected= true;
-                        if (speciality != null){
-                            speciality.addUser(user);
+                        connected = true;
+                        if (specialty != null) {
+                            specialty.addUser(user);
                         }
                     }
                 }
             }
             if (!connected) System.out.println(user.getUserFullName() + " не смог подобрать специальность");
         }
+    }
+
+    public void analyzeSpecialties(){
+        specialties.stream().forEach(Specialty::calculateFields);
     }
 }

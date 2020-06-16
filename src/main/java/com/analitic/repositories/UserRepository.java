@@ -1,6 +1,5 @@
 package com.analitic.repositories;
 
-import com.analitic.models.Service;
 import com.analitic.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

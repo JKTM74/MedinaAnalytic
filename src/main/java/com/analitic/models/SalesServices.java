@@ -10,14 +10,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "qdfsalesservices")
 @NoArgsConstructor @AllArgsConstructor @Getter @Setter
-public class Service {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class SalesServices {
 
-    @Column(name = "patientcalc")
-    private String patientName;
+    @Column(name = "servicescount")
+    private int servicesCount;
 
-    @Column(name = "PatientID")
-    private long patientId;
+    @Column(name = "patientscount")
+    private int patientsCount;
+
+    @Column(name = "sumprice")
+    private double sumPrice;
 }
