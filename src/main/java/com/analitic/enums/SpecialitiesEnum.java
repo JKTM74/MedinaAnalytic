@@ -1,4 +1,4 @@
-package com.analitic.Enums;
+package com.analitic.enums;
 
 import java.util.List;
 

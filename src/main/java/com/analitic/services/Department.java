@@ -1,14 +1,12 @@
 package com.analitic.services;
 
-import com.analitic.Enums.SpecialitiesEnum;
+import com.analitic.enums.SpecialitiesEnum;
 import com.analitic.models.User;
 import com.analitic.repositories.SalesServicesRepository;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.EnumSet;
 import java.util.List;

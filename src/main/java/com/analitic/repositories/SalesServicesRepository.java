@@ -17,7 +17,7 @@ public interface SalesServicesRepository extends JpaRepository<SalesServices, UU
      * @param date
      * @return Курс(выполненные) по врачу и дате
      */
-    @Query(value = "SELECT count(id) AS servicesCount, sum(Price2) AS sumPrice, COUNT(DISTINCT(PatientID)) AS patientsCount\n" +
+    @Query(value = "SELECT iif(max(ID) IS NULL, 0, max(ID)) AS ID, count(id) AS servicesCount, iif(sum(Price2) IS NULL, 0, sum(Price2)) AS sumPrice, COUNT(DISTINCT(PatientID)) AS patientsCount\n" +
             "FROM tblSalesServices \n" +
             "WHERE FORMAT(SurveyDate, 'MM-yyyy') = :date AND \n" +
             "Doctor LIKE '%' + :user + '%' AND \n" +
@@ -35,7 +35,7 @@ public interface SalesServicesRepository extends JpaRepository<SalesServices, UU
      * @param date
      * @return Курс(направленные) по врачу и дате
      */
-    @Query(value = "SELECT count(id) AS servicesCount, sum(Price2) AS sumPrice, COUNT(DISTINCT(PatientID)) AS patientsCount\n" +
+    @Query(value = "SELECT iif(max(ID) IS NULL, 0, max(ID)) AS ID, count(id) AS servicesCount, iif(sum(Price2) IS NULL, 0, sum(Price2)) AS sumPrice, COUNT(DISTINCT(PatientID)) AS patientsCount\n" +
             "FROM tblSalesServices \n" +
             "WHERE FORMAT(SurveyDate, 'MM-yyyy') = :date AND \n" +
             "Doctor NOT LIKE '%' + :user + '%' AND \n" +
@@ -52,7 +52,7 @@ public interface SalesServicesRepository extends JpaRepository<SalesServices, UU
      * @param date
      * @return Оказанные услуги (без курса)
      */
-    @Query(value = "SELECT count(id) AS servicesCount, sum(Price2) AS sumPrice, COUNT(DISTINCT(PatientID)) AS patientsCount\n" +
+    @Query(value = "SELECT iif(max(ID) IS NULL, 0, max(ID)) AS ID, count(id) AS servicesCount, iif(sum(Price2) IS NULL, 0, sum(Price2)) AS sumPrice, COUNT(DISTINCT(PatientID)) AS patientsCount\n" +
             "FROM tblSalesServices \n" +
             "WHERE FORMAT(SurveyDate, 'MM-yyyy') = :date AND \n" +
             "Doctor LIKE '%' + :user + '%' AND \n" +

@@ -46,12 +46,17 @@ public class Specialty {
     }
 
     public void calculateFields(SalesServicesRepository salesServicesRepository){
+        this.salesServicesRepository = salesServicesRepository;
         for (User user: users){
-            this.salesServicesRepository = salesServicesRepository;
             calcAllKl(user);
             calcKl(user);
             calcStreet(user);
         }
+
+        System.out.println(this.name);
+        System.out.printf("AllKlSum - %f  ALLKLPatientCount - %d ALLKLServicesCount - %d\n", allKLSum, allKLPatientsCount, allKLServicesCount);
+        System.out.printf("KlSum - %f  KLPatientCount - %d KLServicesCount - %d\n", KLSum, KLPatientsCount, KLServicesCount);
+        System.out.printf("streetSum - %f  streetPatientCount - %d streetServicesCount - %d\n", streetSum, streetPatientsCount, streetServicesCount);
     }
 
     private void calcAllKl(User user) {
