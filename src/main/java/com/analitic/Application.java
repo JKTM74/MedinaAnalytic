@@ -1,7 +1,5 @@
 package com.analitic;
 
-import com.analitic.repositories.SalesServicesRepository;
-import com.analitic.repositories.UserRepository;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.boot.SpringApplication;
@@ -18,14 +16,6 @@ import java.util.Date;
 @EntityScan("com.analitic.models")
 @EnableJpaRepositories("com.analitic.repositories")
 public class Application {
-
-    private static SalesServicesRepository salesServicesRepository = null;
-    private static UserRepository userRepository = null;
-
-    public Application(SalesServicesRepository service, UserRepository userRepository) {
-        Application.salesServicesRepository = salesServicesRepository;
-        Application.userRepository = userRepository;
-    }
 
     public static void main(String[] args) throws IOException {
         SpringApplication.run(Application.class, args);

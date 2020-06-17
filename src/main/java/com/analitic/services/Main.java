@@ -1,6 +1,7 @@
 package com.analitic.services;
 
 import com.analitic.connectors.SheetConnector;
+import com.analitic.repositories.SalesServicesRepository;
 import com.analitic.repositories.UserRepository;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,13 @@ import java.util.stream.Collectors;
 @Service
 public class Main {
     private final UserRepository userRepository;
+    private final SalesServicesRepository salesServicesRepository;
 
     private static final int[] DEPARTMENT_NUMBERS = {1, 2, 3}; // если меняются отделения, править тут
 
-    public Main( UserRepository userRepository) {
+    public Main(UserRepository userRepository, SalesServicesRepository salesServicesRepository) {
         this.userRepository = userRepository;
+        this.salesServicesRepository = salesServicesRepository;
         startAnalytic();
     }
 
@@ -28,7 +31,7 @@ public class Main {
                         Department.builder()
                                 .number(num).build()).collect(Collectors.toList());
 
-        department.forEach(this::departmentAnalyse);
+        department.stream().forEach(this::departmentAnalyse);
     }
 
     private void departmentAnalyse(Department department) {
@@ -42,11 +45,15 @@ public class Main {
 
             department.connectUserToSpeciality();
 
-            department.analyzeSpecialties();
+            department.analyzeSpecialties(salesServicesRepository);
 
         } catch (IOException | InvalidFormatException e) {
             e.printStackTrace();
         }
+    }
+
+    public SalesServicesRepository getSalesServicesRepository(){
+        return this.salesServicesRepository;
     }
 }
 

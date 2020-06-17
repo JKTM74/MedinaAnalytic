@@ -4,15 +4,19 @@ import com.analitic.models.SalesServices;
 import com.analitic.models.User;
 import com.analitic.repositories.SalesServicesRepository;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter @Setter @Builder @AllArgsConstructor
+@Getter @Setter @Builder @AllArgsConstructor @NoArgsConstructor
 public class Specialty {
-    private final SalesServicesRepository salesServicesRepository;
+    private SalesServicesRepository salesServicesRepository;
+
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-yyyy");
     private final String date = simpleDateFormat.format(new Date(System.currentTimeMillis()));
 
@@ -41,8 +45,9 @@ public class Specialty {
         users.add(user);
     }
 
-    public void calculateFields(){
+    public void calculateFields(SalesServicesRepository salesServicesRepository){
         for (User user: users){
+            this.salesServicesRepository = salesServicesRepository;
             calcAllKl(user);
             calcKl(user);
             calcStreet(user);

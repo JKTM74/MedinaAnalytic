@@ -11,12 +11,6 @@ import java.util.UUID;
 @Repository
 public interface SalesServicesRepository extends JpaRepository<SalesServices, UUID> {
 
-    /*@Query(value = "SELECT SUM(price) FROM qdfSelesToUsers WHERE doctor like :user + '%' AND Course = 0 AND FORMAT(SurveyDate, 'MM-yyyy') = :date", nativeQuery = true)
-    Double getSumByUserAndDateWithoutCourse(@Param("user") String user, @Param("date") String date);
-
-    @Query(value = "SELECT SUM(price) FROM qdfSelesToUsers WHERE napr like :user + '%' AND Course = 1 AND FORMAT(SurveyDate, 'MM-yyyy') = :date", nativeQuery = true)
-    Double getSumByUserAndDateWithCourse(@Param("user") String user, @Param("date") String date);*/
-
     /**
      *
      * @param user - врач
