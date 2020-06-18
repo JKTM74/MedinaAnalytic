@@ -10,3 +10,5 @@ spring:
     username: user
     password: prolog0580
   show-sql: true
+
+sheet-file-path: \\\\192.168.1.10\\Server\\Общие папки\\Автоматизация\\Анализ направлений\\Новая аналитика тест\\

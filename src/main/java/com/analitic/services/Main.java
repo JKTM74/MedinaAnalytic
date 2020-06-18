@@ -1,12 +1,9 @@
 package com.analitic.services;
 
-import com.analitic.connectors.SheetConnector;
 import com.analitic.repositories.SalesServicesRepository;
 import com.analitic.repositories.UserRepository;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,45 +12,26 @@ import java.util.stream.Collectors;
 public class Main {
     private final UserRepository userRepository;
     private final SalesServicesRepository salesServicesRepository;
+    private final Department department;
 
     private static final int[] DEPARTMENT_NUMBERS = {1, 2, 3}; // если меняются отделения, править тут
 
-    public Main(UserRepository userRepository, SalesServicesRepository salesServicesRepository) {
+    public Main(UserRepository userRepository, SalesServicesRepository salesServicesRepository, Department department) {
         this.userRepository = userRepository;
         this.salesServicesRepository = salesServicesRepository;
+        this.department = department;
         startAnalytic();
     }
 
     private void startAnalytic() {
 
-        List<Department> department = Arrays.stream(DEPARTMENT_NUMBERS)
-                .mapToObj(num ->
-                        Department.builder()
-                                .number(num).build()).collect(Collectors.toList());
+        List<List<ExcelLine>> excelLines = Arrays.stream(DEPARTMENT_NUMBERS)
+                .mapToObj(department::getExcelLines)
+                .collect(Collectors.toList());
 
-        department.stream().forEach(this::departmentAnalyse);
-    }
-
-    private void departmentAnalyse(Department department) {
-
-        try {
-            SheetConnector sheetConnector = new SheetConnector(department.getNumber());
-
-            department.setSpecialtiesFromExcel(sheetConnector.getSpecialtiesFromExcel());
-
-            department.setUsers(userRepository.findUsersByDepartment(department.getNumber()));
-
-            department.connectUserToSpeciality();
-
-            department.analyzeSpecialties(salesServicesRepository);
-
-        } catch (IOException | InvalidFormatException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public SalesServicesRepository getSalesServicesRepository(){
-        return this.salesServicesRepository;
+        excelLines.stream()
+                .flatMap(List::stream)
+                .forEach(System.out::println);
     }
 }
 
