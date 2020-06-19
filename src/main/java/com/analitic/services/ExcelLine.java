@@ -5,7 +5,7 @@ import lombok.*;
 
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor @Builder
 public class ExcelLine {
-    private SheetConnector sheetConnector;
+    private int departmentNumber;
 
     private int sheetNumber;
     private String sheetName;
@@ -43,7 +43,7 @@ public class ExcelLine {
     @Override
     public String toString() {
         return "ExcelLine{" +
-                "sheetConnector=" + sheetConnector +
+                "departmentNumber=" + departmentNumber +
                 ", sheetNumber=" + sheetNumber +
                 ", sheetName='" + sheetName + '\'' +
                 ", allKLSum=" + allKLSum +

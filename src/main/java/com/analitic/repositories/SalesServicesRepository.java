@@ -48,7 +48,7 @@ public interface SalesServicesRepository extends JpaRepository<SalesServices, UU
 
     /**
      *
-     * @param user
+     * @param user - врач
      * @param date
      * @return Оказанные услуги (без курса)
      */

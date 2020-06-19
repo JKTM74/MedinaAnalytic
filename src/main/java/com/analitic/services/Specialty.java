@@ -1,18 +1,13 @@
 package com.analitic.services;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import com.analitic.models.SalesServices;
 import com.analitic.models.User;
 import com.analitic.repositories.SalesServicesRepository;
-import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class Specialty {

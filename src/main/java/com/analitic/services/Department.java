@@ -23,35 +23,37 @@ public class Department {
 
     public List<ExcelLine> getExcelLines(int departmentNumber) {
         List<User> users = userRepository.findUsersByDepartment(departmentNumber);
-        List<ExcelLine> excelLines = new ArrayList<>();
 
-        Map<String, Integer> sheets = sheetConnector.getSpecialtiesFromExcel(departmentNumber).entrySet().stream()
-                .filter(entry -> !entry.getKey().startsWith("Д ")
-                        && !entry.getKey().contains("свод"))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        Map<String, Integer> sheets = getSheets(sheetConnector.getSpecialtiesFromExcel(departmentNumber));
 
-        setCorrectUsersSpecialty(users, sheets.keySet());
+        setCorrectSpecialtiesForUsers(users, sheets.keySet());
 
-        for (Map.Entry entry : sheets.entrySet()) {
-            ExcelLine excelLine = new ExcelLine();
-
-            excelLine.setSheetConnector(sheetConnector);
-            excelLine.setSheetName((String) entry.getKey());
-            excelLine.setSheetNumber((Integer) entry.getValue());
-
-            List<User> usersBySpecialty = users.stream()
-                    .filter(u -> u.getSpecialty().equals(excelLine.getSheetName()))
-                    .collect(Collectors.toList());
-
-            for (User user : usersBySpecialty) {
-                specialty.setFieldsValues(user, excelLine);
-            }
-            excelLines.add(excelLine);
-        }
-        return excelLines;
+        return getLines(sheets, users, departmentNumber);
     }
 
-    public void setCorrectUsersSpecialty(List<User> users, Set<String> specialties) {
+    private List<ExcelLine> getLines(Map<String, Integer> sheets, List<User> users, int departmentNumber){
+        return sheets.entrySet().stream()
+                .map(s ->
+                        ExcelLine.builder()
+                            .departmentNumber(departmentNumber)
+                            .sheetName(s.getKey())
+                            .sheetNumber(s.getValue())
+                            .build())
+                .peek( (e) ->
+                        users.stream()
+                        .filter(u -> u.getSpecialty().equals(e.getSheetName()))
+                        .forEach((u) -> specialty.setFieldsValues(u, e)))
+                .collect(Collectors.toList());
+    }
+
+    private Map<String, Integer> getSheets(Map<String, Integer> specialties){
+        return specialties.entrySet().stream()
+                .filter(entry -> !entry.getKey().startsWith("Д ")
+                        && !entry.getKey().toLowerCase().contains("свод"))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    private void setCorrectSpecialtiesForUsers(List<User> users, Set<String> specialties) {
         for (User user : users) {
             boolean found = false;
             for (String specialty : specialties) {

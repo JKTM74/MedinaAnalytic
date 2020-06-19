@@ -21,13 +21,4 @@ public class User {
 
     @Column(name = "otdel")
     private String department;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userFullName='" + userFullName + '\'' +
-                ", title='" + specialty + '\'' +
-                ", department=" + department +
-                '}';
-    }
 }
