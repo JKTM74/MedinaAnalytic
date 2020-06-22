@@ -48,7 +48,11 @@ public class SheetConnector {
             int rowNumber = 4;
 
             while (sheet.getRow(rowNumber) != null) {
-                rowNumber++;
+                if (sheet.getRow(rowNumber).getCell(0) != null) {
+                    rowNumber++;
+                } else{
+                    break;
+                }
             }
 
             XSSFRow row = sheet.createRow(rowNumber);
@@ -56,14 +60,33 @@ public class SheetConnector {
             CellStyle cellStyle = workbook.createCellStyle();
             CreationHelper createHelper = workbook.getCreationHelper();
             cellStyle.setDataFormat(
-                    createHelper.createDataFormat().getFormat("MM.yyyy"));
-
-            cellStyle.setFillBackgroundColor(IndexedColors.AQUA.getIndex());
-            cellStyle.setFillPattern(CellStyle.BIG_SPOTS);
+                    createHelper.createDataFormat().getFormat("MMMM yyyy"));
 
             XSSFCell cell = row.createCell(0);
             cell.setCellValue(new Date());
             cell.setCellStyle(cellStyle);
+
+            rowNumber++;
+            row.createCell(1).setCellValue(excelLine.getAllKLSum());
+            row.createCell(2).setCellValue(excelLine.getAllKLPatientsCount());
+            row.createCell(3).setCellFormula(getCellFormula("B", "C", rowNumber));
+            row.createCell(4).setCellValue(excelLine.getAllKLServicesCount());
+            row.createCell(5).setCellFormula(getCellFormula("E", "C", rowNumber));
+            row.createCell(6).setCellValue(excelLine.getKLSum());
+            row.createCell(7).setCellValue(excelLine.getKLPatientsCount());
+            row.createCell(8).setCellFormula(getCellFormula("G", "H", rowNumber));
+            row.createCell(9).setCellValue(excelLine.getKLServicesCount());
+            row.createCell(10).setCellFormula(getCellFormula("J", "H", rowNumber));
+            row.createCell(11).setCellValue(excelLine.getStreetSum());
+            row.createCell(12).setCellValue(excelLine.getStreetPatientsCount());
+            row.createCell(13).setCellFormula(getCellFormula("L", "M", rowNumber));
+            row.createCell(14).setCellValue(excelLine.getStreetServicesCount());
+            row.createCell(15).setCellFormula(getCellFormula("O", "M", rowNumber));
+            row.createCell(16).setCellFormula(getCellFormula("B", "L", rowNumber));
+            row.createCell(17).setCellFormula("C" + rowNumber + "+ M" + rowNumber);
+            row.createCell(18).setCellFormula(getCellFormula("Q", "R", rowNumber));
+            row.createCell(19).setCellFormula("E" + rowNumber + "+ O" + rowNumber);
+            row.createCell(20).setCellFormula(getCellFormula("T", "R", rowNumber));
 
             inputStream.close();
 
@@ -74,5 +97,9 @@ public class SheetConnector {
         } catch (IOException e) {
             e.getMessage();
         }
+    }
+
+    private String getCellFormula(String dividend, String divider, int rowNumber){
+        return "IF(" + divider + rowNumber + "<>0," + dividend + rowNumber + "/" + divider + rowNumber + ",0)";
     }
 }
