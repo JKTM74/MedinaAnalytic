@@ -1,18 +1,15 @@
 package com.analitic.connectors;
 
 import com.analitic.services.ExcelLine;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,8 +35,10 @@ public class SheetConnector {
     }
 
     public void writeToExcel(ExcelLine excelLine) {
-        String fullFilePath = filePath + "ВП " + excelLine.getDepartmentNumber() + " отделение.xlsx";
-        try (Workbook workbook = WorkbookFactory.create(new File(fullFilePath));) {
+        File file = new File(filePath + "ВП " + excelLine.getDepartmentNumber() + " отделение.xlsx");
+        try (FileInputStream inputStream = new FileInputStream(file)) {
+
+            XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
             Sheet sheet = workbook.getSheetAt(excelLine.getSheetNumber());
 
             int rowNumber = 4;
@@ -49,12 +48,8 @@ public class SheetConnector {
             }
             rowNumber++;
 
-            Row row = sheet.createRow(rowNumber);
-            Cell test = row.createCell(0);
-            test.setCellValue("sadasd");
-            workbook.write(new FileOutputStream(fullFilePath));
             System.out.println(rowNumber);
-        } catch (IOException | InvalidFormatException e) {
+        } catch (IOException e) {
             e.getMessage();
         }
     }

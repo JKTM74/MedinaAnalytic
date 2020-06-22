@@ -30,9 +30,9 @@ public class Main {
     private void startAnalytic() {
 
         List<List<ExcelLine>> excelLines = Arrays.stream(DEPARTMENT_NUMBERS)
+
                 .mapToObj(department::getExcelLines)
                 .collect(Collectors.toList());
-
 
         excelLines.stream()
                 .flatMap(List::stream)
