@@ -1,11 +1,9 @@
 package com.analitic.connectors;
 
 import com.analitic.services.ExcelLine;
+import org.apache.poi.hssf.usermodel.HSSFDataFormat;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +23,7 @@ public class SheetConnector {
     public Map<String, Integer> getSpecialtiesFromExcel(int number) {
         Map<String, Integer> sheets = new HashMap<>();
         File file = new File(filePath + "ВП " + number + " отделение.xlsx");
-        try (FileInputStream inputStream = new FileInputStream(file)){
+        try (FileInputStream inputStream = new FileInputStream(file)) {
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 
             for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
@@ -40,66 +38,136 @@ public class SheetConnector {
 
     public void writeToExcel(ExcelLine excelLine) {
         File file = new File(filePath + "ВП " + excelLine.getDepartmentNumber() + " отделение.xlsx");
-        try (FileInputStream inputStream = new FileInputStream(file)) {
 
+        try {
+            FileInputStream inputStream = new FileInputStream(file);
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
             XSSFSheet sheet = workbook.getSheetAt(excelLine.getSheetNumber());
 
-            int rowNumber = 4;
-
-            while (sheet.getRow(rowNumber) != null) {
-                if (sheet.getRow(rowNumber).getCell(0) != null) {
-                    rowNumber++;
-                } else{
-                    break;
-                }
-            }
+            int rowNumber = getRowNumber(sheet);
 
             XSSFRow row = sheet.createRow(rowNumber);
 
-            CellStyle cellStyle = workbook.createCellStyle();
-            CreationHelper createHelper = workbook.getCreationHelper();
-            cellStyle.setDataFormat(
-                    createHelper.createDataFormat().getFormat("MMMM yyyy"));
+            CellStyle cellDateStyle = workbook.createCellStyle();
+            cellDateStyle.setDataFormat(workbook.createDataFormat().getFormat("MMMM yyyy"));
+
+            XSSFCellStyle decimalCellStyle = workbook.createCellStyle();
+            decimalCellStyle.setDataFormat(workbook.createDataFormat().getFormat("0.00"));
 
             XSSFCell cell = row.createCell(0);
+            cell.setCellStyle(cellDateStyle);
             cell.setCellValue(new Date());
-            cell.setCellStyle(cellStyle);
 
             rowNumber++;
-            row.createCell(1).setCellValue(excelLine.getAllKLSum());
-            row.createCell(2).setCellValue(excelLine.getAllKLPatientsCount());
-            row.createCell(3).setCellFormula(getCellFormula("B", "C", rowNumber));
-            row.createCell(4).setCellValue(excelLine.getAllKLServicesCount());
-            row.createCell(5).setCellFormula(getCellFormula("E", "C", rowNumber));
-            row.createCell(6).setCellValue(excelLine.getKLSum());
-            row.createCell(7).setCellValue(excelLine.getKLPatientsCount());
-            row.createCell(8).setCellFormula(getCellFormula("G", "H", rowNumber));
-            row.createCell(9).setCellValue(excelLine.getKLServicesCount());
-            row.createCell(10).setCellFormula(getCellFormula("J", "H", rowNumber));
-            row.createCell(11).setCellValue(excelLine.getStreetSum());
-            row.createCell(12).setCellValue(excelLine.getStreetPatientsCount());
-            row.createCell(13).setCellFormula(getCellFormula("L", "M", rowNumber));
-            row.createCell(14).setCellValue(excelLine.getStreetServicesCount());
-            row.createCell(15).setCellFormula(getCellFormula("O", "M", rowNumber));
-            row.createCell(16).setCellFormula(getCellFormula("B", "L", rowNumber));
-            row.createCell(17).setCellFormula("C" + rowNumber + "+ M" + rowNumber);
-            row.createCell(18).setCellFormula(getCellFormula("Q", "R", rowNumber));
-            row.createCell(19).setCellFormula("E" + rowNumber + "+ O" + rowNumber);
-            row.createCell(20).setCellFormula(getCellFormula("T", "R", rowNumber));
+
+            createAllKlCells(row, rowNumber, excelLine, decimalCellStyle);
+
+            createKLCells(row, rowNumber, excelLine, decimalCellStyle);
+
+            createStreetCells(row, rowNumber, excelLine, decimalCellStyle);
+
+            createResultCells(row, rowNumber, decimalCellStyle);
 
             inputStream.close();
 
             FileOutputStream out = new FileOutputStream(file);
 
             workbook.write(out);
-            System.out.println(rowNumber);
+
         } catch (IOException e) {
             e.getMessage();
         }
     }
 
-    private String getCellFormula(String dividend, String divider, int rowNumber){
+    private void createResultCells(XSSFRow row, int rowNumber, XSSFCellStyle decimalCellStyle) {
+        XSSFCell cell;
+
+        cell = row.createCell(16);
+        cell.setCellStyle(decimalCellStyle);
+        cell.setCellFormula("B" + rowNumber + "+ L" + rowNumber);
+
+        row.createCell(17).setCellFormula("C" + rowNumber + "+ M" + rowNumber);
+
+        cell = row.createCell(18);
+        cell.setCellStyle(decimalCellStyle);
+        cell.setCellFormula(getCellFormula("Q", "R", rowNumber));
+
+        row.createCell(19).setCellFormula("E" + rowNumber + "+ O" + rowNumber);
+
+        cell = row.createCell(20);
+        cell.setCellStyle(decimalCellStyle);
+        cell.setCellFormula(getCellFormula("T", "R", rowNumber));
+    }
+
+    private void createStreetCells(XSSFRow row, int rowNumber, ExcelLine excelLine, XSSFCellStyle decimalCellStyle) {
+        XSSFCell cell;
+
+        row.createCell(11).setCellValue(excelLine.getStreetSum());
+
+        row.createCell(12).setCellValue(excelLine.getStreetPatientsCount());
+
+        cell = row.createCell(13);
+        cell.setCellStyle(decimalCellStyle);
+        cell.setCellFormula(getCellFormula("L", "M", rowNumber));
+
+        row.createCell(14).setCellValue(excelLine.getStreetServicesCount());
+
+        cell = row.createCell(15);
+        cell.setCellStyle(decimalCellStyle);
+        cell.setCellFormula(getCellFormula("O", "M", rowNumber));
+    }
+
+    private void createKLCells(XSSFRow row, int rowNumber, ExcelLine excelLine, XSSFCellStyle decimalCellStyle) {
+        XSSFCell cell;
+
+        row.createCell(6).setCellValue(excelLine.getKLSum());
+
+        row.createCell(7).setCellValue(excelLine.getKLPatientsCount());
+
+        cell = row.createCell(8);
+        cell.setCellStyle(decimalCellStyle);
+        cell.setCellFormula(getCellFormula("G", "H", rowNumber));
+
+        row.createCell(9).setCellValue(excelLine.getKLServicesCount());
+
+        cell = row.createCell(10);
+        cell.setCellStyle(decimalCellStyle);
+        cell.setCellFormula(getCellFormula("J", "H", rowNumber));
+    }
+
+    private void createAllKlCells(XSSFRow row, int rowNumber, ExcelLine excelLine, XSSFCellStyle decimalCellStyle) {
+        XSSFCell cell;
+
+        row.createCell(1).setCellValue(excelLine.getAllKLSum());
+
+        row.createCell(2).setCellValue(excelLine.getAllKLPatientsCount());
+
+        cell = row.createCell(3);
+        cell.setCellStyle(decimalCellStyle);
+        cell.setCellFormula(getCellFormula("B", "C", rowNumber));
+
+        row.createCell(4).setCellValue(excelLine.getAllKLServicesCount());
+
+        cell = row.createCell(5);
+        cell.setCellStyle(decimalCellStyle);
+        cell.setCellFormula(getCellFormula("E", "C", rowNumber));
+    }
+
+    private int getRowNumber(XSSFSheet sheet) {
+        int rowNumber = 0;
+
+        while (sheet.getRow(rowNumber) != null) {
+            XSSFCell cell = sheet.getRow(rowNumber).getCell(0);
+            if (cell != null && cell.getCellType() != XSSFCell.CELL_TYPE_BLANK) {
+                rowNumber++;
+            } else {
+                break;
+            }
+        }
+        return rowNumber;
+    }
+
+    private String getCellFormula(String dividend, String divider, int rowNumber) {
         return "IF(" + divider + rowNumber + "<>0," + dividend + rowNumber + "/" + divider + rowNumber + ",0)";
     }
 }
