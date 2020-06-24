@@ -1,9 +1,9 @@
 package com.analitic.connectors;
 
 import com.analitic.services.ExcelLine;
-import org.apache.poi.hssf.usermodel.HSSFDataFormat;
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.xssf.usermodel.*;
+import org.openxmlformats.schemas.drawingml.x2006.chart.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -74,9 +75,39 @@ public class SheetConnector {
 
             workbook.write(out);
 
+            drawChart(workbook, excelLine.getSheetName());
+
         } catch (IOException e) {
             e.getMessage();
         }
+    }
+
+    private void drawChart(XSSFWorkbook workbook, String sheetName) {
+        XSSFSheet sheet = workbook.getSheet("Д " + sheetName);
+        XSSFChart chart = getChartWithTitle(sheet, "Сумма");
+
+
+        CTChart ctChart = chart.getCTChart();
+        CTPlotArea ctPlotArea = ctChart.getPlotArea();
+
+        CTLineChart ctLineChart = ctPlotArea.getLineChartArray(0);
+        CTLineSer ctLineSer =  ctLineChart.getSerArray(0);
+
+        CTAxDataSource cttAxDataSource = ctLineSer.getCat();
+        CTStrRef ctStrRef = cttAxDataSource.getStrRef();
+
+        System.out.println(ctStrRef.getF());
+    }
+
+    static XSSFChart getChartWithTitle(XSSFSheet sheet, String wantedTitle) {
+        if (sheet == null || wantedTitle == null) return null;
+        XSSFDrawing drawing = sheet.createDrawingPatriarch();
+        List<XSSFChart> charts = drawing.getCharts();
+        for (XSSFChart chart : charts) {
+            String title = chart.getTitle().getString();
+            if (wantedTitle.equals(title)) return chart;
+        }
+        return null;
     }
 
     private void createResultCells(XSSFRow row, int rowNumber, XSSFCellStyle decimalCellStyle) {
@@ -168,6 +199,6 @@ public class SheetConnector {
     }
 
     private String getCellFormula(String dividend, String divider, int rowNumber) {
-        return "IF(" + divider + rowNumber + "<>0," + dividend + rowNumber + "/" + divider + rowNumber + ",0)";
+        return "IF(" + divider + rowNumber + "<>0," + dividend + rowNumber + "/" + divider + rowNumber + ",0.00)";
     }
 }
