@@ -2,6 +2,7 @@ package com.analitic.services;
 
 import com.analitic.connectors.SheetConnector;
 import com.analitic.enums.SpecialitiesEnum;
+import com.analitic.models.ExcelLine;
 import com.analitic.models.User;
 import com.analitic.repositories.UserRepository;
 import org.springframework.stereotype.Service;
