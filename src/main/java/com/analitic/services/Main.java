@@ -14,7 +14,7 @@ public class Main {
     private final SheetConnector sheetConnector;
 
     // если меняются отделения, править тут
-    private static final int[] DEPARTMENT_NUMBERS = {3};
+    private static final int[] DEPARTMENT_NUMBERS = {1};
 
     public Main(Department department, SheetConnector sheetConnector) {
         this.department = department;
@@ -28,9 +28,10 @@ public class Main {
                 .mapToObj(department::getExcelLines)
                 .collect(Collectors.toList());
 
-        excelLines.stream()
-                .flatMap(List::stream)
-                .forEach(sheetConnector::writeToExcel);
+
+
+
+        excelLines.stream().forEach(sheetConnector::writeToExcel);
     }
 }
 

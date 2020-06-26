@@ -25,7 +25,7 @@ public class Department {
     public List<ExcelLine> getExcelLines(int departmentNumber) {
         List<User> users = userRepository.findUsersByDepartment(departmentNumber);
 
-        Map<String, Integer> sheets = getSheets(sheetConnector.getSpecialtiesFromExcel(departmentNumber));
+        Map<String, Integer> sheets = getSheets(sheetConnector.getSheetsFromExcel(departmentNumber));
 
         setCorrectSpecialtiesForUsers(users, sheets.keySet());
 

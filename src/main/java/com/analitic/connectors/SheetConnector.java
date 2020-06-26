@@ -23,7 +23,7 @@ public class SheetConnector {
     @Value(value = "${sheet-file-path}")
     private String filePath;
 
-    public Map<String, Integer> getSpecialtiesFromExcel(int number) {
+    public Map<String, Integer> getSheetsFromExcel(int number) {
         Map<String, Integer> sheets = new HashMap<>();
         File file = new File(filePath + "ВП " + number + " отделение.xlsx");
         try (FileInputStream inputStream = new FileInputStream(file)) {
@@ -39,39 +39,69 @@ public class SheetConnector {
         }
     }
 
-    public void writeToExcel(ExcelLine excelLine) {
-        File file = new File(filePath + "ВП " + excelLine.getDepartmentNumber() + " отделение.xlsx");
+    public void writeToExcel(List<ExcelLine> excelLines) {
+        int departmentNumber = excelLines.get(0).getDepartmentNumber();
+        File file = new File(filePath + "ВП " + departmentNumber + " отделение.xlsx");
 
         try {
             FileInputStream inputStream = new FileInputStream(file);
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
-            XSSFSheet sheet = workbook.getSheetAt(excelLine.getSheetNumber());
-
-            int rowNumber = getRowNumber(sheet);
-
-            XSSFRow row = sheet.createRow(rowNumber);
-
-            XSSFCellStyle cellDateStyle = getCellDateStyle(workbook);
-            XSSFCellStyle decimalCellStyle = getCellDecimalStyle(workbook);
-            XSSFCellStyle integerCellStyle = getCellIntegerStyle(workbook);
-
-            XSSFCell cell = row.createCell(0);
-            cell.setCellStyle(cellDateStyle);
-            cell.setCellValue(new Date());
-
-            rowNumber++;
-
-            createAllKlCells(row, rowNumber, excelLine, integerCellStyle, decimalCellStyle);
-
-            createKLCells(row, rowNumber, excelLine, integerCellStyle, decimalCellStyle);
-
-            createStreetCells(row, rowNumber, excelLine, integerCellStyle, decimalCellStyle);
-
-            createResultCells(row, rowNumber, integerCellStyle, decimalCellStyle);
-
             inputStream.close();
 
-            drawCharts(workbook, excelLine.getSheetName(), rowNumber);
+            for (ExcelLine excelLine : excelLines) {
+                XSSFSheet sheet = workbook.getSheetAt(excelLine.getSheetNumber());
+
+                int rowNumber = getRowNumber(sheet);
+
+                XSSFRow row = sheet.createRow(rowNumber);
+
+                XSSFCellStyle cellDateStyle = getCellDateStyle(workbook);
+                XSSFCellStyle decimalCellStyle = getCellDecimalStyle(workbook);
+                XSSFCellStyle integerCellStyle = getCellIntegerStyle(workbook);
+
+                XSSFCell cell = row.createCell(0);
+                cell.setCellStyle(cellDateStyle);
+                cell.setCellValue(new Date());
+
+                rowNumber++;
+
+                createAllKlCells(row, rowNumber, excelLine, integerCellStyle, decimalCellStyle);
+
+                createKLCells(row, rowNumber, excelLine, integerCellStyle, decimalCellStyle);
+
+                createStreetCells(row, rowNumber, excelLine, integerCellStyle, decimalCellStyle);
+
+                createResultCells(row, rowNumber, integerCellStyle, decimalCellStyle);
+
+                drawCharts(workbook, excelLine.getSheetName(), rowNumber);
+            }
+
+            XSSFSheet sheet = workbook.getSheet("Свод " + departmentNumber + " отделения");
+
+            if (sheet != null) {
+                int rowNumber = getRowNumber(sheet);
+                XSSFRow oldRow = sheet.getRow(rowNumber - 1);
+                XSSFRow newRow = sheet.createRow(rowNumber);
+
+                int cellNum = 0;
+                while (oldRow.cellIterator().hasNext()) {
+                    XSSFCell oldCell = oldRow.getCell(cellNum);
+                    if (oldCell == null) break;
+
+                    XSSFCell newCell = newRow.createCell(cellNum);
+
+                    if (oldCell.getCellType() == CellType.FORMULA) {
+                        newCell.setCellFormula(oldCell.getCellFormula().replace(String.valueOf(rowNumber), String.valueOf(rowNumber + 1)));
+                        newCell.setCellStyle(oldCell.getCellStyle());
+                    } else if (cellNum == 0) {
+                        newCell.setCellValue(new Date());
+                        newCell.setCellStyle(oldCell.getCellStyle());
+                    }
+
+                    cellNum++;
+                }
+                drawCharts(workbook, "Свод " + departmentNumber + " отделения", rowNumber + 1);
+            }
 
             FileOutputStream out = new FileOutputStream(file);
             workbook.write(out);
@@ -84,7 +114,7 @@ public class SheetConnector {
 
     private XSSFCellStyle getCellDateStyle(XSSFWorkbook workbook) {
         IndexedColorMap colorMap = workbook.getStylesSource().getIndexedColors();
-        XSSFColor color = new XSSFColor(new java.awt.Color(153,204,255), colorMap);
+        XSSFColor color = new XSSFColor(new java.awt.Color(153, 204, 255), colorMap);
 
         XSSFCellStyle cellStyle = workbook.createCellStyle();
         cellStyle.setDataFormat(workbook.createDataFormat().getFormat("MMMM yyyy"));
@@ -103,7 +133,7 @@ public class SheetConnector {
         XSSFColor color = new XSSFColor(new java.awt.Color(255, 215, 181), colorMap);
 
         XSSFCellStyle cellStyle = workbook.createCellStyle();
-        cellStyle.setDataFormat(workbook.createDataFormat().getFormat("0.00"));
+        cellStyle.setDataFormat(workbook.createDataFormat().getFormat("# ##0.00"));
         cellStyle.setFillForegroundColor(color);
         cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
         cellStyle.setBorderLeft(BorderStyle.THIN);
@@ -135,7 +165,7 @@ public class SheetConnector {
         XSSFDrawing drawing = sheet.createDrawingPatriarch();
         List<XSSFChart> charts = drawing.getCharts();
 
-        for (XSSFChart chart: charts) {
+        for (XSSFChart chart : charts) {
             CTChart ctChart = chart.getCTChart();
             CTPlotArea ctPlotArea = ctChart.getPlotArea();
 
