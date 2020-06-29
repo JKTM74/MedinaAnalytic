@@ -14,7 +14,7 @@ public class Main {
     private final SheetConnector sheetConnector;
 
     // если меняются отделения, править тут
-    private static final int[] DEPARTMENT_NUMBERS = {1};
+    private static final int[] DEPARTMENT_NUMBERS = {2};
 
     public Main(Department department, SheetConnector sheetConnector) {
         this.department = department;

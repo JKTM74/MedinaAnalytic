@@ -24,6 +24,12 @@ public class Specialty {
         calcStreet(user, excelLine);
     }
 
+    public void setUziFieldsValues(User user, ExcelLine excelLine) {
+        calcUziAll(user, excelLine);
+        calcUziKl(user, excelLine);
+        calcUziStreet(user, excelLine);
+    }
+
     private void calcAllKl(User user, ExcelLine excelLine) {
         SalesServices personalServices = salesServicesRepository.getPersonalServices(user.getUserFullName(), date);
         SalesServices directedServices = salesServicesRepository.getDirectedServices(user.getUserFullName(), date);
@@ -43,6 +49,29 @@ public class Specialty {
 
     private void calcStreet(User user, ExcelLine excelLine) {
         SalesServices streetServices = salesServicesRepository.getStreetServices(user.getUserFullName(), date);
+
+        excelLine.setStreetVars(streetServices.getPatientsCount(), streetServices.getServicesCount(), streetServices.getSumPrice());
+    }
+
+    private void calcUziAll(User user, ExcelLine excelLine){
+        SalesServices personalUziServices = salesServicesRepository.getPersonalUziServices(user.getUserFullName(), date);
+        SalesServices directedUziServices = salesServicesRepository.getDirectedUziServices(user.getUserFullName(), date);
+
+        int patientsCount = personalUziServices.getPatientsCount() + directedUziServices.getPatientsCount();
+        int servicesCount = personalUziServices.getServicesCount() + directedUziServices.getServicesCount();
+        double allKlSum = personalUziServices.getSumPrice() + directedUziServices.getSumPrice();
+
+        excelLine.setAllKLVars(patientsCount, servicesCount, allKlSum);
+    }
+
+    private void calcUziKl(User user, ExcelLine excelLine) {
+        SalesServices personalUziServices = salesServicesRepository.getPersonalUziServices(user.getUserFullName(), date);
+
+        excelLine.setKLVars(personalUziServices.getPatientsCount(), personalUziServices.getServicesCount(), personalUziServices.getSumPrice());
+    }
+
+    private void calcUziStreet(User user, ExcelLine excelLine) {
+        SalesServices streetServices = salesServicesRepository.getStreetUziServices(user.getUserFullName(), date);
 
         excelLine.setStreetVars(streetServices.getPatientsCount(), streetServices.getServicesCount(), streetServices.getSumPrice());
     }

@@ -7,6 +7,7 @@ import com.analitic.models.User;
 import com.analitic.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Executable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -27,9 +28,18 @@ public class Department {
 
         Map<String, Integer> sheets = getSheets(sheetConnector.getSheetsFromExcel(departmentNumber));
 
+        List<ExcelLine> excelLines = new ArrayList<>();
+
+        if (departmentNumber == 2){
+            List<User> uziUsers = getUziUsers(users);
+            excelLines.add(getUziLine(uziUsers));
+        }
+
         setCorrectSpecialtiesForUsers(users, sheets.keySet());
 
-        return getLines(sheets, users, departmentNumber);
+        excelLines.addAll(getLines(sheets, users, departmentNumber));
+
+        return excelLines;
     }
 
     private List<ExcelLine> getLines(Map<String, Integer> sheets, List<User> users, int departmentNumber){
@@ -50,7 +60,8 @@ public class Department {
     private Map<String, Integer> getSheets(Map<String, Integer> specialties){
         return specialties.entrySet().stream()
                 .filter(entry -> !entry.getKey().startsWith("Д ")
-                        && !entry.getKey().toLowerCase().contains("свод"))
+                        && !entry.getKey().toLowerCase().contains("свод")
+                        && !entry.getKey().toLowerCase().contains("узи"))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
@@ -72,5 +83,26 @@ public class Department {
                 }
             }
         }
+    }
+
+    private List<User> getUziUsers(List<User> users){
+        return users.stream()
+                .filter((u) -> u.getSpecialty().toLowerCase().contains("узи") ||
+                        u.getSpecialty().toLowerCase().contains("ультразвук"))
+                .collect(Collectors.toList());
+    }
+
+    private ExcelLine getUziLine(List<User> users){
+        ExcelLine uziLine = ExcelLine.builder()
+                .departmentNumber(2)
+                .sheetNumber(10)
+                .sheetName("УЗИ")
+                .build();
+
+        for (User user: users){
+            specialty.setUziFieldsValues(user, uziLine);
+        }
+
+        return uziLine;
     }
 }
