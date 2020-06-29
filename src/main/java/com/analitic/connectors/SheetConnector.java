@@ -39,6 +39,22 @@ public class SheetConnector {
         }
     }
 
+    public Map<String, Integer> getSheetsFromExcel(String fileName) {
+        Map<String, Integer> sheets = new HashMap<>();
+        File file = new File(filePath + fileName);
+        try (FileInputStream inputStream = new FileInputStream(file)) {
+            XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+
+            for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
+                sheets.put(workbook.getSheetName(i), i);
+            }
+            return sheets;
+        } catch (IOException e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
     public void writeToExcel(List<ExcelLine> excelLines) {
         int departmentNumber = excelLines.get(0).getDepartmentNumber();
         File file = new File(filePath + "ВП " + departmentNumber + " отделение.xlsx");
@@ -49,7 +65,7 @@ public class SheetConnector {
             inputStream.close();
 
             for (ExcelLine excelLine : excelLines) {
-                XSSFSheet sheet = workbook.getSheetAt(excelLine.getSheetNumber());
+                XSSFSheet sheet = workbook.getSheet(excelLine.getSheetName());
 
                 int rowNumber = getRowNumber(sheet);
 

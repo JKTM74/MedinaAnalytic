@@ -4,7 +4,6 @@ import com.analitic.models.ExcelLine;
 import com.analitic.models.SalesServices;
 import com.analitic.models.User;
 import com.analitic.repositories.SalesServicesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -12,11 +11,15 @@ import java.text.SimpleDateFormat;
 
 @Service
 public class Specialty {
-    @Autowired
-    private SalesServicesRepository salesServicesRepository;
+
+    private final SalesServicesRepository salesServicesRepository;
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-yyyy");
     private final String date = simpleDateFormat.format(new Date(System.currentTimeMillis()));
+
+    public Specialty(SalesServicesRepository salesServicesRepository) {
+        this.salesServicesRepository = salesServicesRepository;
+    }
 
     public void setFieldsValues(User user, ExcelLine excelLine) {
         calcAllKl(user, excelLine);

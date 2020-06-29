@@ -12,13 +12,15 @@ import java.util.stream.Collectors;
 public class Main {
     private final Department department;
     private final SheetConnector sheetConnector;
+    private final LiFiCalc liFiCalc;
 
     // если меняются отделения, править тут
-    private static final int[] DEPARTMENT_NUMBERS = {2};
+    private static final int[] DEPARTMENT_NUMBERS = {1, 2};
 
-    public Main(Department department, SheetConnector sheetConnector) {
+    public Main(Department department, SheetConnector sheetConnector, LiFiCalc liFiCalc) {
         this.department = department;
         this.sheetConnector = sheetConnector;
+        this.liFiCalc = liFiCalc;
         startAnalytic();
     }
 
@@ -28,8 +30,9 @@ public class Main {
                 .mapToObj(department::getExcelLines)
                 .collect(Collectors.toList());
 
+        List<ExcelLine> liFiLines  = liFiCalc.getExcelLines();
 
-
+        excelLines.add(liFiLines);
 
         excelLines.stream().forEach(sheetConnector::writeToExcel);
     }
