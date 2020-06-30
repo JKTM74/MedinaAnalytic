@@ -23,10 +23,20 @@ public class LiFiCalc {
 
         Map<String, Integer> sheets = sheetConnector.getSheetsFromExcel("ЛИ_ФИ_процедурный_комиссии.xlsx");
 
+        ExcelLine analiziLine = getAnaliziExcelLine(sheets.get("Анализы"));
+
         List<ExcelLine> excelLines = new ArrayList<>();
 
-
-
         return excelLines;
+    }
+
+    private ExcelLine getAnaliziExcelLine(Integer sheetNumber) {
+        ExcelLine analiziLine = ExcelLine.builder()
+                                    .departmentNumber(0)
+                                    .sheetName("Анализы")
+                                    .sheetNumber(sheetNumber)
+                                .build();
+
+        return null;
     }
 }
