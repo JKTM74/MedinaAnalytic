@@ -38,22 +38,4 @@ public class ExcelLine {
         this.streetServicesCount += streetServicesCount;
         this.streetSum += streetSum;
     }
-
-    @Override
-    public String toString() {
-        return "ExcelLine{" +
-                "departmentNumber=" + departmentNumber +
-                ", sheetNumber=" + sheetNumber +
-                ", sheetName='" + sheetName + '\'' +
-                ", allKLSum=" + allKLSum +
-                ", allKLPatientsCount=" + allKLPatientsCount +
-                ", allKLServicesCount=" + allKLServicesCount +
-                ", KLSum=" + KLSum +
-                ", KLPatientsCount=" + KLPatientsCount +
-                ", KLServicesCount=" + KLServicesCount +
-                ", streetSum=" + streetSum +
-                ", streetPatientsCount=" + streetPatientsCount +
-                ", streetServicesCount=" + streetServicesCount +
-                '}';
-    }
 }

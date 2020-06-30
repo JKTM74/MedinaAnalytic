@@ -30,11 +30,9 @@ public class Main {
                 .mapToObj(department::getExcelLines)
                 .collect(Collectors.toList());
 
-        List<ExcelLine> liFiLines  = liFiCalc.getExcelLines();
-
-        excelLines.add(liFiLines);
-
         excelLines.stream().forEach(sheetConnector::writeToExcel);
+
+        liFiCalc.calc();
     }
 }
 
