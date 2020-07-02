@@ -15,7 +15,7 @@ public class Main {
     private final LiFiCalc liFiCalc;
 
     // если меняются отделения, править тут
-    private static final int[] DEPARTMENT_NUMBERS = {1, 2};
+    private static final int[] DEPARTMENT_NUMBERS = {1, 2, 3};
 
     public Main(Department department, SheetConnector sheetConnector, LiFiCalc liFiCalc) {
         this.department = department;

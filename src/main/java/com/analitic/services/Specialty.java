@@ -15,7 +15,7 @@ public class Specialty {
     private final SalesServicesRepository salesServicesRepository;
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-yyyy");
-    private final String date = simpleDateFormat.format(new Date(System.currentTimeMillis()));
+    private final String date = simpleDateFormat.format(java.sql.Date.valueOf("2020-06-01"));
 
     public Specialty(SalesServicesRepository salesServicesRepository) {
         this.salesServicesRepository = salesServicesRepository;

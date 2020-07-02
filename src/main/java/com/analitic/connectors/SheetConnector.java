@@ -1,6 +1,7 @@
 package com.analitic.connectors;
 
 import com.analitic.models.ExcelLine;
+import com.analitic.models.ExcelLineKomissii;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.FillPatternType;
@@ -13,19 +14,22 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 @Component
 public class SheetConnector {
     @Value(value = "${sheet-file-path}")
     private String filePath;
 
-    public Map<String, Integer> getSheetsFromExcel(int number) {
+    private final Date date = java.sql.Date.valueOf("2020-06-01");
+
+    public Map<String, Integer> getSheetsFromExcel(int departmentNumber) {
         Map<String, Integer> sheets = new HashMap<>();
-        File file = new File(filePath + "ВП " + number + " отделение.xlsx");
+        File file = new File(filePath + "ВП " + departmentNumber + " отделение.xlsx");
         try (FileInputStream inputStream = new FileInputStream(file)) {
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 
@@ -55,6 +59,82 @@ public class SheetConnector {
         }
     }
 
+    public void writeToExcel(ExcelLineKomissii excelLineKomissii){
+        File file = new File(filePath + "ЛИ_ФИ_процедурный_комиссии.xlsx");
+
+        try{
+            FileInputStream inputStream = new FileInputStream(file);
+            XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+            inputStream.close();
+
+            XSSFSheet sheet = workbook.getSheet(excelLineKomissii.getSheetName());
+
+            int rowNumber = getRowNumber(sheet);
+
+            XSSFRow row = sheet.createRow(rowNumber);
+
+            XSSFCellStyle cellDateStyle = getCellDateStyle(workbook);
+            XSSFCellStyle decimalCellStyle = getCellDecimalStyle(workbook);
+            XSSFCellStyle integerCellStyle = getCellIntegerStyle(workbook);
+
+            XSSFCell cell = row.createCell(0);
+            cell.setCellStyle(cellDateStyle);
+            cell.setCellValue(date);
+
+            rowNumber++;
+
+            createKomissiiCells(row, rowNumber, excelLineKomissii, integerCellStyle, decimalCellStyle);
+
+            drawCharts(workbook, excelLineKomissii.getSheetName(), rowNumber);
+
+            FileOutputStream out = new FileOutputStream(file);
+            workbook.write(out);
+            out.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void writeToExcel(ExcelLine excelLine){
+        File file = new File(filePath + "ЛИ_ФИ_процедурный_комиссии.xlsx");
+
+        try{
+            FileInputStream inputStream = new FileInputStream(file);
+            XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+            inputStream.close();
+
+            XSSFSheet sheet = workbook.getSheet(excelLine.getSheetName());
+
+            int rowNumber = getRowNumber(sheet);
+
+            XSSFRow row = sheet.createRow(rowNumber);
+
+            XSSFCellStyle cellDateStyle = getCellDateStyle(workbook);
+            XSSFCellStyle decimalCellStyle = getCellDecimalStyle(workbook);
+            XSSFCellStyle integerCellStyle = getCellIntegerStyle(workbook);
+
+            XSSFCell cell = row.createCell(0);
+            cell.setCellStyle(cellDateStyle);
+            cell.setCellValue(date);
+
+            rowNumber++;
+
+            createAllKlCells(row, rowNumber, excelLine, integerCellStyle, decimalCellStyle);
+
+            createKLCells(row, rowNumber, excelLine, integerCellStyle, decimalCellStyle);
+
+            createStreetCells(row, rowNumber, excelLine, integerCellStyle, decimalCellStyle);
+
+            drawCharts(workbook, excelLine.getSheetName(), rowNumber);
+
+            FileOutputStream out = new FileOutputStream(file);
+            workbook.write(out);
+            out.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     public void writeToExcel(List<ExcelLine> excelLines) {
         int departmentNumber = excelLines.get(0).getDepartmentNumber();
         File file = new File(filePath + "ВП " + departmentNumber + " отделение.xlsx");
@@ -77,7 +157,7 @@ public class SheetConnector {
 
                 XSSFCell cell = row.createCell(0);
                 cell.setCellStyle(cellDateStyle);
-                cell.setCellValue(new Date());
+                cell.setCellValue(date);
 
                 rowNumber++;
 
@@ -110,7 +190,7 @@ public class SheetConnector {
                         newCell.setCellFormula(oldCell.getCellFormula().replace(String.valueOf(rowNumber), String.valueOf(rowNumber + 1)));
                         newCell.setCellStyle(oldCell.getCellStyle());
                     } else if (cellNum == 0) {
-                        newCell.setCellValue(new Date());
+                        newCell.setCellValue(date);
                         newCell.setCellStyle(oldCell.getCellStyle());
                     }
 
@@ -299,6 +379,38 @@ public class SheetConnector {
         cell = row.createCell(5);
         cell.setCellStyle(decimalCellStyle);
         cell.setCellFormula(getDivisionFormula("E", "C", rowNumber));
+    }
+
+    private void createKomissiiCells(XSSFRow row, int rowNumber, ExcelLineKomissii excelLineKomissii, XSSFCellStyle integerCellStyle, XSSFCellStyle decimalCellStyle) {
+        XSSFCell cell;
+
+        cell = row.createCell(1);
+        cell.setCellStyle(decimalCellStyle);
+        cell.setCellValue(excelLineKomissii.getStreetSum());
+
+        cell = row.createCell(2);
+        cell.setCellStyle(integerCellStyle);
+        cell.setCellValue(excelLineKomissii.getPatientsCount());
+
+        cell = row.createCell(3);
+        cell.setCellStyle(decimalCellStyle);
+        cell.setCellFormula(getDivisionFormula("B", "C", rowNumber));
+
+        cell = row.createCell(4);
+        cell.setCellStyle(integerCellStyle);
+        cell.setCellValue(excelLineKomissii.getServicesCount());
+
+        cell = row.createCell(5);
+        cell.setCellStyle(decimalCellStyle);
+        cell.setCellFormula(getDivisionFormula("E", "C", rowNumber));
+
+        cell = row.createCell(6);
+        cell.setCellStyle(decimalCellStyle);
+        cell.setCellValue(excelLineKomissii.getOrgSum());
+
+        cell = row.createCell(7);
+        cell.setCellStyle(decimalCellStyle);
+        cell.setCellFormula("B" + rowNumber + " + G" + rowNumber);
     }
 
     private int getRowNumber(XSSFSheet sheet) {

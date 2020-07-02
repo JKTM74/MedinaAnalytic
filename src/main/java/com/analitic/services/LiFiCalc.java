@@ -7,7 +7,6 @@ import com.analitic.models.SalesServices;
 import com.analitic.repositories.SalesServicesRepository;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
@@ -17,8 +16,7 @@ public class LiFiCalc {
     private final SalesServicesRepository salesServicesRepository;
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-yyyy");
-    private final Date date = Date.valueOf("2020-06-01");
-    private final String stringDate = simpleDateFormat.format(date);
+    private final String date = simpleDateFormat.format(java.sql.Date.valueOf("2020-06-01"));
 
 
     public LiFiCalc(SheetConnector sheetConnector, SalesServicesRepository salesServicesRepository) {
@@ -33,6 +31,9 @@ public class LiFiCalc {
         ExcelLine procedurniyLine = getProcedurniyExcelLine(sheets.get("Процедурный"));
         ExcelLineKomissii excelLineKomissii = getKomissiiExcelLine(sheets.get("Комиссии"));
 
+        sheetConnector.writeToExcel(analyzesLine);
+        sheetConnector.writeToExcel(procedurniyLine);
+        sheetConnector.writeToExcel(excelLineKomissii);
     }
 
     private ExcelLine getAnalyzesExcelLine(Integer sheetNumber) {
@@ -71,9 +72,9 @@ public class LiFiCalc {
     }
 
     private void calcAnalyzes(ExcelLine analyzesLine) {
-        SalesServices allAnalyzes = salesServicesRepository.getAllAnalyzes(stringDate);
-        SalesServices allKlAnalyzes = salesServicesRepository.getAllKlAnalyzes(stringDate);
-        SalesServices streetAnalyzes = salesServicesRepository.getStreetAnalyzes(stringDate);
+        SalesServices allAnalyzes = salesServicesRepository.getAllAnalyzes(date);
+        SalesServices allKlAnalyzes = salesServicesRepository.getAllKlAnalyzes(date);
+        SalesServices streetAnalyzes = salesServicesRepository.getStreetAnalyzes(date);
 
         analyzesLine.setAllKLVars(allAnalyzes.getPatientsCount(), allAnalyzes.getServicesCount(), allAnalyzes.getSumPrice());
         analyzesLine.setKLVars(allKlAnalyzes.getPatientsCount(), allKlAnalyzes.getServicesCount(), allKlAnalyzes.getSumPrice());
@@ -81,9 +82,9 @@ public class LiFiCalc {
     }
 
     private void calcProcedurniy(ExcelLine procedurniyLine) {
-        SalesServices allProcedurniy = salesServicesRepository.getAllProcedurniy(stringDate);
-        SalesServices allKlProcedurniy = salesServicesRepository.getAllKlProcedurniy(stringDate);
-        SalesServices streetProcedurniy = salesServicesRepository.getStreetProcedurniy(stringDate);
+        SalesServices allProcedurniy = salesServicesRepository.getAllProcedurniy(date);
+        SalesServices allKlProcedurniy = salesServicesRepository.getAllKlProcedurniy(date);
+        SalesServices streetProcedurniy = salesServicesRepository.getStreetProcedurniy(date);
 
         procedurniyLine.setAllKLVars(allProcedurniy.getPatientsCount(), allProcedurniy.getServicesCount(), allProcedurniy.getSumPrice());
         procedurniyLine.setKLVars(allKlProcedurniy.getPatientsCount(), allKlProcedurniy.getServicesCount(), allKlProcedurniy.getSumPrice());
@@ -91,8 +92,8 @@ public class LiFiCalc {
     }
 
     private void calcKomissii(ExcelLineKomissii komissiiLine) {
-        SalesServices streetKomissii = salesServicesRepository.getStreetKomissii(stringDate);
-        Double orgSum = salesServicesRepository.getKomissiiOrg(stringDate);
+        SalesServices streetKomissii = salesServicesRepository.getStreetKomissii(date);
+        Double orgSum = salesServicesRepository.getKomissiiOrg(date);
 
         komissiiLine.setStreetVars(streetKomissii.getSumPrice(), streetKomissii.getPatientsCount(), streetKomissii.getServicesCount());
 
