@@ -54,6 +54,7 @@ public interface SalesServicesRepository extends JpaRepository<SalesServices, UU
             "WHERE FORMAT(SurveyDate, 'MM-yyyy') = :date AND \n" +
             "Doctor LIKE '%' + :user + '%' AND \n" +
             "Service NOT IN (Select Service FROM tblServicePayExeption) AND \n" +
+            "course = 0 AND \n" +
             "(Napr NOT LIKE '%' + :user + '%' OR Napr IS NULL) AND \n" +
             "(Sert <> 'ЗП' OR Sert IS NULL)  AND \n" +
             "(Service NOT LIKE '%УЗИ%' OR Service IS NULL) AND \n" +
@@ -101,6 +102,7 @@ public interface SalesServicesRepository extends JpaRepository<SalesServices, UU
             "WHERE FORMAT(SurveyDate, 'MM-yyyy') = :date AND \n" +
             "(Doctor LIKE '%' + :user + '%' OR Doctor IS NULL) AND \n" +
             "Service NOT IN (Select Service FROM tblServicePayExeption) AND \n" +
+            "course = 0 AND \n" +
             "(Napr NOT LIKE '%' + :user+ '%' OR Napr IS NULL) AND \n" +
             "(Sert <> 'ЗП' OR Sert IS NULL)  AND \n" +
             "Service LIKE '%УЗИ%'", nativeQuery = true)

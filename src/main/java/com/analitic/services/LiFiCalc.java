@@ -1,6 +1,6 @@
 package com.analitic.services;
 
-import com.analitic.connectors.SheetConnector;
+import com.analitic.connectors.SheetReaderWriter;
 import com.analitic.models.ExcelLine;
 import com.analitic.models.ExcelLineKomissii;
 import com.analitic.models.SalesServices;
@@ -8,34 +8,45 @@ import com.analitic.repositories.SalesServicesRepository;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
+/**
+ * Расчет Лабораторных и Функциональных исследований.
+ */
 @Service
 public class LiFiCalc {
-    private final SheetConnector sheetConnector;
+    private final SheetReaderWriter sheetReaderWriter;
     private final SalesServicesRepository salesServicesRepository;
 
-    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-yyyy");
-    private final String date = simpleDateFormat.format(java.sql.Date.valueOf("2020-06-01"));
+    private String date;
 
-
-    public LiFiCalc(SheetConnector sheetConnector, SalesServicesRepository salesServicesRepository) {
-        this.sheetConnector = sheetConnector;
+    public LiFiCalc(SheetReaderWriter sheetReaderWriter, SalesServicesRepository salesServicesRepository) {
+        this.sheetReaderWriter = sheetReaderWriter;
         this.salesServicesRepository = salesServicesRepository;
     }
 
+    /**
+     * Запуск расчетов по анализам, процедурному кабинету, комиссиям.
+     * Запись результатов в Excel файл.
+     */
     public void calc(){
-        Map<String, Integer> sheets = sheetConnector.getSheetsFromExcel("ЛИ_ФИ_процедурный_комиссии.xlsx");
+        Map<String, Integer> sheets = sheetReaderWriter.getSheetsFromExcel("ЛИ_ФИ_процедурный_комиссии.xlsx");
 
         ExcelLine analyzesLine = getAnalyzesExcelLine(sheets.get("Анализы"));
         ExcelLine procedurniyLine = getProcedurniyExcelLine(sheets.get("Процедурный"));
         ExcelLineKomissii excelLineKomissii = getKomissiiExcelLine(sheets.get("Комиссии"));
 
-        sheetConnector.writeToExcel(analyzesLine);
-        sheetConnector.writeToExcel(procedurniyLine);
-        sheetConnector.writeToExcel(excelLineKomissii);
+        sheetReaderWriter.writeToExcel(analyzesLine);
+        sheetReaderWriter.writeToExcel(procedurniyLine);
+        sheetReaderWriter.writeToExcel(excelLineKomissii);
     }
 
+    /**
+     *Создание строки для анализов, запуск вычислений.
+     * @param sheetNumber - номер Excel листа
+     * @return стркоа готовая для записи в Excel файл.
+     */
     private ExcelLine getAnalyzesExcelLine(Integer sheetNumber) {
         ExcelLine analyzesLine = ExcelLine.builder()
                                     .departmentNumber(0)
@@ -48,6 +59,11 @@ public class LiFiCalc {
         return analyzesLine;
     }
 
+    /**
+     *Создание строки для процедурного кабинета, запуск вычислений.
+     * @param sheetNumber - номер Excel листа
+     * @return стркоа готовая для записи в Excel файл.
+     */
     private ExcelLine getProcedurniyExcelLine(Integer sheetNumber) {
         ExcelLine procedurniyLine = ExcelLine.builder()
                 .departmentNumber(0)
@@ -60,6 +76,11 @@ public class LiFiCalc {
         return procedurniyLine;
     }
 
+    /**
+     *Создание строки для комиссий, запуск вычислений.
+     * @param sheetNumber - номер Excel листа
+     * @return стркоа готовая для записи в Excel файл.
+     */
     private ExcelLineKomissii getKomissiiExcelLine(Integer sheetNumber) {
         ExcelLineKomissii komissiiLine = ExcelLineKomissii.builder()
                 .sheetName("Комиссии")
@@ -71,6 +92,10 @@ public class LiFiCalc {
         return komissiiLine;
     }
 
+    /**
+     * Получение данных из БД по анализам и добавление их в строку для записи.
+     * @param analyzesLine - строка анализов
+     */
     private void calcAnalyzes(ExcelLine analyzesLine) {
         SalesServices allAnalyzes = salesServicesRepository.getAllAnalyzes(date);
         SalesServices allKlAnalyzes = salesServicesRepository.getAllKlAnalyzes(date);
@@ -81,6 +106,10 @@ public class LiFiCalc {
         analyzesLine.setStreetVars(streetAnalyzes.getPatientsCount(), streetAnalyzes.getServicesCount(), streetAnalyzes.getSumPrice());
     }
 
+    /**
+     * Получение данных из БД по процедурному кабинету и добавление их в строку для записи.
+     * @param procedurniyLine - строка процедурного кабинета
+     */
     private void calcProcedurniy(ExcelLine procedurniyLine) {
         SalesServices allProcedurniy = salesServicesRepository.getAllProcedurniy(date);
         SalesServices allKlProcedurniy = salesServicesRepository.getAllKlProcedurniy(date);
@@ -91,6 +120,10 @@ public class LiFiCalc {
         procedurniyLine.setStreetVars(streetProcedurniy.getPatientsCount(), streetProcedurniy.getServicesCount(), streetProcedurniy.getSumPrice());
     }
 
+    /**
+     * Получение данных из БД по комиссиям и добавление их в строку для записи.
+     * @param komissiiLine - строка комиссий
+     */
     private void calcKomissii(ExcelLineKomissii komissiiLine) {
         SalesServices streetKomissii = salesServicesRepository.getStreetKomissii(date);
         Double orgSum = salesServicesRepository.getKomissiiOrg(date);
@@ -98,5 +131,13 @@ public class LiFiCalc {
         komissiiLine.setStreetVars(streetKomissii.getSumPrice(), streetKomissii.getPatientsCount(), streetKomissii.getServicesCount());
 
         komissiiLine.setOrgSum(orgSum);
+    }
+
+    /**
+     * Устанавливает дату из гуя для запросов к БД.
+     * @param date дата с гуя
+     */
+    public void setDate(Date date) {
+        this.date = new SimpleDateFormat("MM-yyyy").format(date);
     }
 }

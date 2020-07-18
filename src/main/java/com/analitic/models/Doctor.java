@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor @AllArgsConstructor @Getter @Setter
-public class User {
+public class Doctor {
 
     @Id
     @Column(name = "ID")

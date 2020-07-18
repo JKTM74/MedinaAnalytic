@@ -1,6 +1,6 @@
 package com.analitic.repositories;
 
-import com.analitic.models.User;
+import com.analitic.models.Doctor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Repository
 @Table(name = "tblusers")
-public interface UserRepository extends JpaRepository<User, UUID> {
+public interface DoctorRepository extends JpaRepository<Doctor, UUID> {
     @Query(value = "Select ID, UserFullName, Title, Otdel from tblUsers WHERE Otdel = :Department AND (Dead = 0 OR Dead IS NULL)", nativeQuery = true)
-    List<User> findUsersByDepartment(@Param("Department") int department);
+    List<Doctor> findDoctorsByDepartment(@Param("Department") int department);
 }
