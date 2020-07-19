@@ -1,6 +1,6 @@
-package com.analitic;
+package com.analytic;
 
-import com.analitic.services.Main;
+import com.analytic.services.Main;
 import org.jdesktop.swingx.JXDatePicker;
 import org.springframework.stereotype.Component;
 

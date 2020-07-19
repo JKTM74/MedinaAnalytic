@@ -1,9 +1,9 @@
-package com.analitic.services;
+package com.analytic.services;
 
-import com.analitic.models.ExcelLine;
-import com.analitic.models.SalesServices;
-import com.analitic.models.Doctor;
-import com.analitic.repositories.SalesServicesRepository;
+import com.analytic.models.Doctor;
+import com.analytic.models.ExcelLine;
+import com.analytic.models.SalesServices;
+import com.analytic.repositories.SalesServicesRepository;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -23,7 +23,8 @@ public class SpecialtyCalc {
 
     /**
      * Вычисление полей любого врача, кроме ультразвукологов.
-     * @param doctor - врач
+     *
+     * @param doctor    - врач
      * @param excelLine - строка специальности.
      */
     public void setFieldsValues(Doctor doctor, ExcelLine excelLine) {
@@ -34,7 +35,8 @@ public class SpecialtyCalc {
 
     /**
      * Вычисление полей для ультразвукологов.
-     * @param doctor - ультразвуколог
+     *
+     * @param doctor    - ультразвуколог
      * @param excelLine - строка УЗИ.
      */
     public void setUziFieldsValues(Doctor doctor, ExcelLine excelLine) {
@@ -46,7 +48,8 @@ public class SpecialtyCalc {
     /**
      * Метод получает информацию по собственным и направленным услугам (Все КЛ) из БД.
      * Вызывает setAllKlVars у строки для суммирования результатов и сохранения в переменных строки.
-     * @param doctor - врач
+     *
+     * @param doctor    - врач
      * @param excelLine - строка специальности.
      */
     private void calcAllKl(Doctor doctor, ExcelLine excelLine) {
@@ -63,7 +66,8 @@ public class SpecialtyCalc {
     /**
      * Метод получает информацию по собственным услугам (КЛ) из БД.
      * Вызывает setAllKlVars у строки для суммирования результатов и сохранения в переменных строки.
-     * @param doctor - врач
+     *
+     * @param doctor    - врач
      * @param excelLine - строка специальности.
      */
     private void calcKl(Doctor doctor, ExcelLine excelLine) {
@@ -75,7 +79,8 @@ public class SpecialtyCalc {
     /**
      * Метод получает информацию по услугам с улицы из БД.
      * Вызывает setAllKlVars у строки для суммирования результатов и сохранения в переменных строки.
-     * @param doctor - врач
+     *
+     * @param doctor    - врач
      * @param excelLine - строка специальности.
      */
     private void calcStreet(Doctor doctor, ExcelLine excelLine) {
@@ -87,10 +92,11 @@ public class SpecialtyCalc {
     /**
      * Метод получает информацию по собственным и направленным услугам (Все КЛ) из БД для УЗИ.
      * Вызывает setAllKlVars у строки для суммирования результатов и сохранения в переменных строки.
-     * @param doctor - врач
+     *
+     * @param doctor    - врач
      * @param excelLine - строка специальности.
      */
-    private void calcUziAll(Doctor doctor, ExcelLine excelLine){
+    private void calcUziAll(Doctor doctor, ExcelLine excelLine) {
         SalesServices personalUziServices = salesServicesRepository.getPersonalUziServices(doctor.getUserFullName(), date);
         SalesServices directedUziServices = salesServicesRepository.getDirectedUziServices(doctor.getUserFullName(), date);
 
@@ -104,7 +110,8 @@ public class SpecialtyCalc {
     /**
      * Метод получает информацию по собственным (КЛ) из БД для УЗИ.
      * Вызывает setAllKlVars у строки для суммирования результатов и сохранения в переменных строки.
-     * @param doctor - врач
+     *
+     * @param doctor    - врач
      * @param excelLine - строка специальности.
      */
     private void calcUziKl(Doctor doctor, ExcelLine excelLine) {
@@ -116,7 +123,8 @@ public class SpecialtyCalc {
     /**
      * Метод получает информацию по услугам с улицы из БД для УЗИ.
      * Вызывает setAllKlVars у строки для суммирования результатов и сохранения в переменных строки.
-     * @param doctor - врач
+     *
+     * @param doctor    - врач
      * @param excelLine - строка специальности.
      */
     private void calcUziStreet(Doctor doctor, ExcelLine excelLine) {
@@ -127,6 +135,7 @@ public class SpecialtyCalc {
 
     /**
      * Устанавливает дату из гуя для запросов к БД.
+     *
      * @param date дата с гуя
      */
     public void setDate(Date date) {

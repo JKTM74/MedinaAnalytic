@@ -1,13 +1,14 @@
-package com.analitic.connectors;
+package com.analytic.connectors;
 
-import com.analitic.models.ExcelLine;
-import com.analitic.models.ExcelLineKomissii;
+import com.analytic.models.ExcelLine;
+import com.analytic.models.ExcelLineKomissii;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.xssf.usermodel.*;
 import org.openxmlformats.schemas.drawingml.x2006.chart.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -22,9 +23,10 @@ import java.util.Map;
 /**
  * Здесь происходит вся работа с Excel файлом.
  */
+@PropertySource(ignoreResourceNotFound = true, value = "classpath:assignment1.properties")
 @Component
 public class SheetReaderWriter {
-    @Value(value = "${sheet-file-path}")
+    @Value("${sheet-file-path}")
     private String filePath;
     private Date date;
 

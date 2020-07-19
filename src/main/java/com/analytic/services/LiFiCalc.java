@@ -1,10 +1,10 @@
-package com.analitic.services;
+package com.analytic.services;
 
-import com.analitic.connectors.SheetReaderWriter;
-import com.analitic.models.ExcelLine;
-import com.analitic.models.ExcelLineKomissii;
-import com.analitic.models.SalesServices;
-import com.analitic.repositories.SalesServicesRepository;
+import com.analytic.connectors.SheetReaderWriter;
+import com.analytic.models.ExcelLine;
+import com.analytic.models.ExcelLineKomissii;
+import com.analytic.models.SalesServices;
+import com.analytic.repositories.SalesServicesRepository;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -30,7 +30,7 @@ public class LiFiCalc {
      * Запуск расчетов по анализам, процедурному кабинету, комиссиям.
      * Запись результатов в Excel файл.
      */
-    public void calc(){
+    public void calc() {
         Map<String, Integer> sheets = sheetReaderWriter.getSheetsFromExcel("ЛИ_ФИ_процедурный_комиссии.xlsx");
 
         ExcelLine analyzesLine = getAnalyzesExcelLine(sheets.get("Анализы"));
@@ -43,16 +43,17 @@ public class LiFiCalc {
     }
 
     /**
-     *Создание строки для анализов, запуск вычислений.
+     * Создание строки для анализов, запуск вычислений.
+     *
      * @param sheetNumber - номер Excel листа
      * @return стркоа готовая для записи в Excel файл.
      */
     private ExcelLine getAnalyzesExcelLine(Integer sheetNumber) {
         ExcelLine analyzesLine = ExcelLine.builder()
-                                    .departmentNumber(0)
-                                    .sheetName("Анализы")
-                                    .sheetNumber(sheetNumber)
-                                .build();
+                .departmentNumber(0)
+                .sheetName("Анализы")
+                .sheetNumber(sheetNumber)
+                .build();
 
         calcAnalyzes(analyzesLine);
 
@@ -60,7 +61,8 @@ public class LiFiCalc {
     }
 
     /**
-     *Создание строки для процедурного кабинета, запуск вычислений.
+     * Создание строки для процедурного кабинета, запуск вычислений.
+     *
      * @param sheetNumber - номер Excel листа
      * @return стркоа готовая для записи в Excel файл.
      */
@@ -77,7 +79,8 @@ public class LiFiCalc {
     }
 
     /**
-     *Создание строки для комиссий, запуск вычислений.
+     * Создание строки для комиссий, запуск вычислений.
+     *
      * @param sheetNumber - номер Excel листа
      * @return стркоа готовая для записи в Excel файл.
      */
@@ -94,6 +97,7 @@ public class LiFiCalc {
 
     /**
      * Получение данных из БД по анализам и добавление их в строку для записи.
+     *
      * @param analyzesLine - строка анализов
      */
     private void calcAnalyzes(ExcelLine analyzesLine) {
@@ -108,6 +112,7 @@ public class LiFiCalc {
 
     /**
      * Получение данных из БД по процедурному кабинету и добавление их в строку для записи.
+     *
      * @param procedurniyLine - строка процедурного кабинета
      */
     private void calcProcedurniy(ExcelLine procedurniyLine) {
@@ -122,6 +127,7 @@ public class LiFiCalc {
 
     /**
      * Получение данных из БД по комиссиям и добавление их в строку для записи.
+     *
      * @param komissiiLine - строка комиссий
      */
     private void calcKomissii(ExcelLineKomissii komissiiLine) {
@@ -135,6 +141,7 @@ public class LiFiCalc {
 
     /**
      * Устанавливает дату из гуя для запросов к БД.
+     *
      * @param date дата с гуя
      */
     public void setDate(Date date) {

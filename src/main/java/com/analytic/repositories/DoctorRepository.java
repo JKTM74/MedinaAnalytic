@@ -1,6 +1,6 @@
-package com.analitic.repositories;
+package com.analytic.repositories;
 
-import com.analitic.models.Doctor;
+import com.analytic.models.Doctor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

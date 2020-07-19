@@ -1,4 +1,4 @@
-package com.analitic;
+package com.analytic;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.io.IOException;
 
-@SpringBootApplication(scanBasePackages = {"com.analitic"})
-@EntityScan("com.analitic.models")
-@EnableJpaRepositories("com.analitic.repositories")
+@SpringBootApplication(scanBasePackages = {"com.analytic"})
+@EntityScan("com.analytic.models")
+@EnableJpaRepositories("com.analytic.repositories")
 public class Application {
 
     public static void main(String[] args) throws IOException {

@@ -1,4 +1,4 @@
-package com.analitic.models;
+package com.analytic.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "qdfsalesservices")
-@NoArgsConstructor @AllArgsConstructor @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class SalesServices {
 
     @Id

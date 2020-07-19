@@ -1,8 +1,8 @@
-package com.analitic.services;
+package com.analytic.services;
 
 
-import com.analitic.connectors.SheetReaderWriter;
-import com.analitic.models.ExcelLine;
+import com.analytic.connectors.SheetReaderWriter;
+import com.analytic.models.ExcelLine;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -35,6 +35,7 @@ public class Main {
      * Метод вызывается по кнопке гуя и запрускает все расчеты.
      * Собирает лист листов ExcelLine по каждому отделению и отправляет их на запись.
      * Отдельно расчитывает ЛИ_ФИ.
+     *
      * @param date - приходит с гуя и с помошью метода setDate прокидываю в остальные классы
      */
     public void startAnalytic(Date date) {
@@ -51,20 +52,12 @@ public class Main {
 
     /**
      * Прокидываю дату из гуя дальше в другие классы.
+     *
      * @param date
      */
-    private void setDate(Date date){
+    private void setDate(Date date) {
         liFiCalc.setDate(date);
         sheetReaderWriter.setDate(date);
         specialtyCalc.setDate(date);
     }
 }
-
-/*TODO: * Сделать ENUM для ассоциаций юзеров по специальностям которых не ясно куда отнести относительно шита. +
- * Написать методы и запросы для сбора аналитики из БД по каждому отделению. +
- * Написать методы для формирования строк в шитах и вбросах этих строк. +
- * Придумать как запускать файл не по расписанию, а по кнопке из МИСа и собирать аналитику по дате которую выберет пользователь. +
- * Реализовать настройку через конфиг. +-
- * Хорошо было бы добавить логирование. -
- * Хорошо было бы добавить гуй. +
- */

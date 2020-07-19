@@ -1,8 +1,12 @@
-package com.analitic.models;
+package com.analytic.models;
 
 import lombok.*;
 
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor @Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ExcelLineKomissii {
     private int sheetNumber;
     private String sheetName;
@@ -13,13 +17,13 @@ public class ExcelLineKomissii {
 
     private double orgSum;
 
-    public void setStreetVars(double streetSum, int patientsCount, int servicesCount){
+    public void setStreetVars(double streetSum, int patientsCount, int servicesCount) {
         this.streetSum = streetSum;
         this.patientsCount = patientsCount;
         this.servicesCount = servicesCount;
     }
 
-    public void setOrgSum(double orgSum){
+    public void setOrgSum(double orgSum) {
         this.orgSum = orgSum;
     }
 }

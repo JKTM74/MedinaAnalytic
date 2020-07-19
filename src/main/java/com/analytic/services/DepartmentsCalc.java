@@ -1,10 +1,10 @@
-package com.analitic.services;
+package com.analytic.services;
 
-import com.analitic.connectors.SheetReaderWriter;
-import com.analitic.enums.SpecialitiesEnum;
-import com.analitic.models.ExcelLine;
-import com.analitic.models.Doctor;
-import com.analitic.repositories.DoctorRepository;
+import com.analytic.connectors.SheetReaderWriter;
+import com.analytic.enums.SpecialitiesEnum;
+import com.analytic.models.Doctor;
+import com.analytic.models.ExcelLine;
+import com.analytic.repositories.DoctorRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -29,6 +29,7 @@ public class DepartmentsCalc {
      * Метод собирает врачей нужного отделения и собирает все специальности из Excel файла.
      * Если отделение 2, отдельно собирает врачей, которые делают УЗИ, расчитыает строку УЗИ и добавляет в лист всех строк.
      * Затем всех врачей ассоциирует с листами(специальностями) Excel файла и запускает расчет всех специальностей.
+     *
      * @param departmentNumber - номер отделения.
      * @return - строки для записи в Excel файл.
      */
@@ -39,7 +40,7 @@ public class DepartmentsCalc {
 
         List<ExcelLine> excelLines = new ArrayList<>();
 
-        if (departmentNumber == 2){
+        if (departmentNumber == 2) {
             List<Doctor> uziDoctors = getUziUsers(doctors);
             excelLines.add(getUziLine(uziDoctors));
         }
@@ -54,32 +55,34 @@ public class DepartmentsCalc {
     /**
      * Метод создаёт по каждой специальсноти(листу Excel файла) строку для вычислений.
      * Далее в стриме для каждой из них отбираются врачи этой специальности и по каждому из этих врачей происходит расчёт.
-     * @param sheets - список листов
-     * @param doctors - врачи отделения
+     *
+     * @param sheets           - список листов
+     * @param doctors          - врачи отделения
      * @param departmentNumber - номер отделения
      * @return список строк для записи в Excel файл.
      */
-    private List<ExcelLine> getLines(Map<String, Integer> sheets, List<Doctor> doctors, int departmentNumber){
+    private List<ExcelLine> getLines(Map<String, Integer> sheets, List<Doctor> doctors, int departmentNumber) {
         return sheets.entrySet().stream()
                 .map(s ->
                         ExcelLine.builder()
-                            .departmentNumber(departmentNumber)
-                            .sheetName(s.getKey())
-                            .sheetNumber(s.getValue())
-                            .build())
-                .peek( (e) ->
+                                .departmentNumber(departmentNumber)
+                                .sheetName(s.getKey())
+                                .sheetNumber(s.getValue())
+                                .build())
+                .peek((e) ->
                         doctors.stream()
-                        .filter(u -> u.getSpecialty().equals(e.getSheetName()))
-                        .forEach((u) -> specialtyCalc.setFieldsValues(u, e)))
+                                .filter(u -> u.getSpecialty().equals(e.getSheetName()))
+                                .forEach((u) -> specialtyCalc.setFieldsValues(u, e)))
                 .collect(Collectors.toList());
     }
 
     /**
      * Метод отфильтровывает ненужные листы и возвращает все с которыми нужно работать.
+     *
      * @param specialties - все листы из Excel файла.
      * @return мапа <Имя Листа, Номер Листа>
      */
-    private Map<String, Integer> getSheets(Map<String, Integer> specialties){
+    private Map<String, Integer> getSheets(Map<String, Integer> specialties) {
         return specialties.entrySet().stream()
                 .filter(entry -> !entry.getKey().startsWith("Д ")
                         && !entry.getKey().toLowerCase().contains("свод")
@@ -90,7 +93,8 @@ public class DepartmentsCalc {
     /**
      * Метод ассоциирует врачей с специальностями в Excel файле с помощью
      * SpecialtiesEnum и исправляет врачам специальности в соответствии с Excel файлом.
-     * @param doctors - врачи отделения
+     *
+     * @param doctors     - врачи отделения
      * @param specialties - специальности
      */
     private void setCorrectSpecialtiesForUsers(List<Doctor> doctors, Set<String> specialties) {
@@ -115,10 +119,11 @@ public class DepartmentsCalc {
 
     /**
      * Метод собирает всех ультразвукологов.
+     *
      * @param doctors - врачи
      * @return список ультразвукологов.
      */
-    private List<Doctor> getUziUsers(List<Doctor> doctors){
+    private List<Doctor> getUziUsers(List<Doctor> doctors) {
         return doctors.stream()
                 .filter((u) -> u.getSpecialty().toLowerCase().contains("узи") ||
                         u.getSpecialty().toLowerCase().contains("ультразвук"))
@@ -127,17 +132,18 @@ public class DepartmentsCalc {
 
     /**
      * Создаёт строку для листа УЗИ, вызывает setUziFieldsValues для расчетов её полей и возвращает эту строку.
+     *
      * @param uziDoctors - ультразвукологи
      * @return строку для записи в Excel с расчитанными полями.
      */
-    private ExcelLine getUziLine(List<Doctor> uziDoctors){
+    private ExcelLine getUziLine(List<Doctor> uziDoctors) {
         ExcelLine uziLine = ExcelLine.builder()
                 .departmentNumber(2)
                 .sheetNumber(10)
                 .sheetName("УЗИ")
                 .build();
 
-        for (Doctor doctor : uziDoctors){
+        for (Doctor doctor : uziDoctors) {
             specialtyCalc.setUziFieldsValues(doctor, uziLine);
         }
 

@@ -1,8 +1,12 @@
-package com.analitic.models;
+package com.analytic.models;
 
 import lombok.*;
 
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor @Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ExcelLine {
     private int departmentNumber;
 
@@ -21,19 +25,19 @@ public class ExcelLine {
     private int streetPatientsCount;
     private int streetServicesCount;
 
-    public void setAllKLVars(int allKLPatientsCount, int allKLServicesCount, double allKLSum){
+    public void setAllKLVars(int allKLPatientsCount, int allKLServicesCount, double allKLSum) {
         this.allKLPatientsCount += allKLPatientsCount;
         this.allKLServicesCount += allKLServicesCount;
         this.allKLSum += allKLSum;
     }
 
-    public void setKLVars(int KLPatientsCount, int KLServicesCount, double KLSum){
+    public void setKLVars(int KLPatientsCount, int KLServicesCount, double KLSum) {
         this.KLPatientsCount += KLPatientsCount;
         this.KLServicesCount += KLServicesCount;
         this.KLSum += KLSum;
     }
 
-    public void setStreetVars(int streetPatientsCount, int streetServicesCount, double streetSum){
+    public void setStreetVars(int streetPatientsCount, int streetServicesCount, double streetSum) {
         this.streetPatientsCount += streetPatientsCount;
         this.streetServicesCount += streetServicesCount;
         this.streetSum += streetSum;

@@ -1,6 +1,6 @@
-package com.analitic.repositories;
+package com.analytic.repositories;
 
-import com.analitic.models.SalesServices;
+import com.analytic.models.SalesServices;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -162,7 +162,6 @@ public interface SalesServicesRepository extends JpaRepository<SalesServices, UU
     SalesServices getAllKlProcedurniy(@Param("date") String date);
 
     /**
-     *
      * @param date
      * @return Процедурный с улицы
      */
@@ -174,7 +173,6 @@ public interface SalesServicesRepository extends JpaRepository<SalesServices, UU
     SalesServices getStreetProcedurniy(@Param("date") String date);
 
     /**
-     *
      * @param date
      * @return Процедурный с улицы
      */
