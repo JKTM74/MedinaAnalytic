@@ -8,7 +8,6 @@ import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.xssf.usermodel.*;
 import org.openxmlformats.schemas.drawingml.x2006.chart.*;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -23,7 +22,6 @@ import java.util.Map;
 /**
  * Здесь происходит вся работа с Excel файлом.
  */
-@PropertySource(ignoreResourceNotFound = true, value = "classpath:assignment1.properties")
 @Component
 public class SheetReaderWriter {
     @Value("${sheet-file-path}")
@@ -319,6 +317,7 @@ public class SheetReaderWriter {
      * @param rowNumber - номер строки
      */
     private void drawCharts(XSSFWorkbook workbook, String sheetName, int rowNumber) {
+
         XSSFSheet sheet = workbook.getSheet("Д " + sheetName);
 
         XSSFDrawing drawing = sheet.createDrawingPatriarch();
@@ -383,7 +382,7 @@ public class SheetReaderWriter {
     private void createResultCells(XSSFRow row, int rowNumber, XSSFCellStyle integerCellStyle, XSSFCellStyle decimalCellStyle) {
         createDecimalCellWithFormula(16, "B" + rowNumber + " + L" + rowNumber, row, decimalCellStyle);
         createIntegerCellWithFormula(17, "C" + rowNumber + " + M" + rowNumber, row, integerCellStyle);
-        createDecimalCellWithFormula(18, "Q" + rowNumber + " + R" + rowNumber, row, decimalCellStyle);
+        createDecimalCellWithFormula(18, getDivisionFormula("Q", "R", rowNumber), row, decimalCellStyle);
         createIntegerCellWithFormula(19, "E" + rowNumber + " + O" + rowNumber, row, integerCellStyle);
         createDecimalCellWithFormula(20, getDivisionFormula("T", "R", rowNumber), row, decimalCellStyle);
     }

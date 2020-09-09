@@ -55,10 +55,11 @@ public class SpecialtyCalc {
     private void calcAllKl(Doctor doctor, ExcelLine excelLine) {
         SalesServices personalServices = salesServicesRepository.getPersonalServices(doctor.getUserFullName(), date);
         SalesServices directedServices = salesServicesRepository.getDirectedServices(doctor.getUserFullName(), date);
+        SalesServices servicesByOtherDoctors = salesServicesRepository.getServicesByOtherDoctors(doctor.getUserFullName(), date);
 
-        int patientsCount = personalServices.getPatientsCount() + directedServices.getPatientsCount();
-        int servicesCount = personalServices.getServicesCount() + directedServices.getServicesCount();
-        double allKlSum = personalServices.getSumPrice() + directedServices.getSumPrice();
+        int patientsCount = personalServices.getPatientsCount() + directedServices.getPatientsCount() + servicesByOtherDoctors.getPatientsCount();
+        int servicesCount = personalServices.getServicesCount() + directedServices.getServicesCount() + servicesByOtherDoctors.getServicesCount();
+        double allKlSum = personalServices.getSumPrice() + directedServices.getSumPrice() + servicesByOtherDoctors.getSumPrice();
 
         excelLine.setAllKLVars(patientsCount, servicesCount, allKlSum);
     }
@@ -99,10 +100,11 @@ public class SpecialtyCalc {
     private void calcUziAll(Doctor doctor, ExcelLine excelLine) {
         SalesServices personalUziServices = salesServicesRepository.getPersonalUziServices(doctor.getUserFullName(), date);
         SalesServices directedUziServices = salesServicesRepository.getDirectedUziServices(doctor.getUserFullName(), date);
+        SalesServices uziServicesByOtherDoctors = salesServicesRepository.getUziServicesByOtherDoctors(doctor.getUserFullName(), date);
 
-        int patientsCount = personalUziServices.getPatientsCount() + directedUziServices.getPatientsCount();
-        int servicesCount = personalUziServices.getServicesCount() + directedUziServices.getServicesCount();
-        double allKlSum = personalUziServices.getSumPrice() + directedUziServices.getSumPrice();
+        int patientsCount = personalUziServices.getPatientsCount() + directedUziServices.getPatientsCount() + uziServicesByOtherDoctors.getPatientsCount();
+        int servicesCount = personalUziServices.getServicesCount() + directedUziServices.getServicesCount() + uziServicesByOtherDoctors.getServicesCount();
+        double allKlSum = personalUziServices.getSumPrice() + directedUziServices.getSumPrice() + uziServicesByOtherDoctors.getSumPrice();
 
         excelLine.setAllKLVars(patientsCount, servicesCount, allKlSum);
     }

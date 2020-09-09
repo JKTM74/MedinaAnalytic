@@ -5,6 +5,7 @@ import com.analytic.enums.SpecialitiesEnum;
 import com.analytic.models.Doctor;
 import com.analytic.models.ExcelLine;
 import com.analytic.repositories.DoctorRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -71,8 +72,8 @@ public class DepartmentsCalc {
                                 .build())
                 .peek((e) ->
                         doctors.stream()
-                                .filter(u -> u.getSpecialty().equals(e.getSheetName()))
-                                .forEach((u) -> specialtyCalc.setFieldsValues(u, e)))
+                                .filter(d -> d.getSpecialty().equals(e.getSheetName()))
+                                .forEach((d) -> specialtyCalc.setFieldsValues(d, e)))
                 .collect(Collectors.toList());
     }
 

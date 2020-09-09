@@ -42,8 +42,12 @@ public class GUI extends JFrame {
     class ButtonEventListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            main.startAnalytic(datePicker.getDate());
-            JOptionPane.showMessageDialog(GUI.this, "Расчет аналитики завершен", "Аналитика", JOptionPane.PLAIN_MESSAGE);
+            try {
+                main.startAnalytic(datePicker.getDate());
+                JOptionPane.showMessageDialog(GUI.this, "Расчет аналитики завершен", "Аналитика", JOptionPane.PLAIN_MESSAGE);
+            }catch (Exception ex){
+                JOptionPane.showMessageDialog(GUI.this, "Расчет аналитики не был завершен, произошла ошибка.\n" + "Сообщение ошибки:" + ex.getMessage(), "Аналитика", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }
