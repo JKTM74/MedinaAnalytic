@@ -2,6 +2,7 @@ package com.analytic.connectors;
 
 import com.analytic.models.ExcelLine;
 import com.analytic.models.ExcelLineKomissii;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.FillPatternType;
@@ -22,6 +23,7 @@ import java.util.Map;
 /**
  * Здесь происходит вся работа с Excel файлом.
  */
+@Slf4j
 @Component
 public class SheetReaderWriter {
     @Value("${sheet-file-path}")
@@ -45,7 +47,7 @@ public class SheetReaderWriter {
             }
             return sheets;
         } catch (IOException e) {
-            e.getMessage();
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -88,7 +90,7 @@ public class SheetReaderWriter {
             workbook.write(out);
             out.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 
@@ -134,7 +136,7 @@ public class SheetReaderWriter {
             workbook.write(out);
             out.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
         }
     }
 
@@ -165,7 +167,7 @@ public class SheetReaderWriter {
             out.close();
 
         } catch (IOException e) {
-            e.getMessage();
+            log.error(e.getMessage());
         }
     }
 

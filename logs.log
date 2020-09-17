@@ -1,0 +1,757 @@
+18-09-2020 00:46:39 INFO  Application:55 - Starting Application on DESKTOP-P8M08C6 with PID 4428 (C:\Users\Vyacheslav\IdeaProjects\excelExample\target\classes started by Vyacheslav in C:\Users\Vyacheslav\IdeaProjects\excelExample)
+18-09-2020 00:46:39 INFO  Application:651 - No active profile set, falling back to default profiles: default
+18-09-2020 00:46:39 INFO  RepositoryConfigurationDelegate:393 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18-09-2020 00:46:39 INFO  RepositoryConfigurationDelegate:403 - Finished Spring Data repository scanning in 40ms. Found 2 JPA repository interfaces.
+18-09-2020 00:46:40 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+18-09-2020 00:46:40 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.17.Final
+18-09-2020 00:46:40 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+18-09-2020 00:46:40 INFO  HikariDataSource:386 - HikariPool-1 - Starting...
+18-09-2020 00:46:41 INFO  HikariDataSource:386 - HikariPool-1 - Start completed.
+18-09-2020 00:46:41 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2012Dialect
+18-09-2020 00:46:41 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+18-09-2020 00:46:41 INFO  LocalContainerEntityManagerFactoryBean:416 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+18-09-2020 00:46:42 INFO  Application:61 - Started Application in 3.855 seconds (JVM running for 4.446)
+18-09-2020 00:46:45 INFO  LocalContainerEntityManagerFactoryBean:598 - Closing JPA EntityManagerFactory for persistence unit 'default'
+18-09-2020 00:46:45 INFO  HikariDataSource:386 - HikariPool-1 - Shutdown initiated...
+18-09-2020 00:46:45 INFO  HikariDataSource:386 - HikariPool-1 - Shutdown completed.
+18-09-2020 00:47:54 INFO  Application:55 - Starting Application on DESKTOP-P8M08C6 with PID 17124 (C:\Users\Vyacheslav\IdeaProjects\excelExample\target\classes started by Vyacheslav in C:\Users\Vyacheslav\IdeaProjects\excelExample)
+18-09-2020 00:47:54 INFO  Application:651 - No active profile set, falling back to default profiles: default
+18-09-2020 00:47:55 INFO  RepositoryConfigurationDelegate:393 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18-09-2020 00:47:55 INFO  RepositoryConfigurationDelegate:403 - Finished Spring Data repository scanning in 39ms. Found 2 JPA repository interfaces.
+18-09-2020 00:47:56 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+18-09-2020 00:47:56 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.17.Final
+18-09-2020 00:47:56 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+18-09-2020 00:47:56 INFO  HikariDataSource:386 - HikariPool-1 - Starting...
+18-09-2020 00:48:27 ERROR HikariPool:391 - HikariPool-1 - Exception during pool initialization.
+com.microsoft.sqlserver.jdbc.SQLServerException: Не удалось установить соединение TCP/IP к серверу 192.168.1.10 по порту 1433. Ошибка: "connect timed out. Проверьте свойства соединения. Убедитесь, что на сервере запущен экземпляр SQL Server и он принимает TCP/IP-соединения по порту. Убедитесь, что TCP-соединения по этому порту не блокируются брандмауэром.".
+	at com.microsoft.sqlserver.jdbc.SQLServerException.makeFromDriverError(SQLServerException.java:234)
+	at com.microsoft.sqlserver.jdbc.SQLServerException.ConvertConnectExceptionToSQLServerException(SQLServerException.java:285)
+	at com.microsoft.sqlserver.jdbc.SocketFinder.findSocket(IOBuffer.java:2434)
+	at com.microsoft.sqlserver.jdbc.TDSChannel.open(IOBuffer.java:659)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connectHelper(SQLServerConnection.java:2546)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.login(SQLServerConnection.java:2216)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connectInternal(SQLServerConnection.java:2067)
+	at com.microsoft.sqlserver.jdbc.SQLServerConnection.connect(SQLServerConnection.java:1204)
+	at com.microsoft.sqlserver.jdbc.SQLServerDriver.connect(SQLServerDriver.java:825)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:358)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:206)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:477)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:560)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:122)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:152)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:176)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:118)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1224)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1255)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:378)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1855)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1792)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:595)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:226)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1108)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:868)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.builder.SpringApplicationBuilder.run(SpringApplicationBuilder.java:140)
+	at com.analytic.Application.main(Application.java:15)
+18-09-2020 00:48:27 WARN  JdbcEnvironmentInitiator:132 - HHH000342: Could not obtain connection to query metadata : Не удалось установить соединение TCP/IP к серверу 192.168.1.10 по порту 1433. Ошибка: "connect timed out. Проверьте свойства соединения. Убедитесь, что на сервере запущен экземпляр SQL Server и он принимает TCP/IP-соединения по порту. Убедитесь, что TCP-соединения по этому порту не блокируются брандмауэром.".
+18-09-2020 00:48:27 WARN  AnnotationConfigApplicationContext:558 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+18-09-2020 00:48:27 INFO  ConditionEvaluationReportLoggingListener:136 - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+18-09-2020 00:48:27 ERROR SpringApplication:837 - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1796)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:595)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:226)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1108)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:868)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:750)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:315)
+	at org.springframework.boot.builder.SpringApplicationBuilder.run(SpringApplicationBuilder.java:140)
+	at com.analytic.Application.main(Application.java:15)
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:275)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:152)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:176)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:118)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1224)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1255)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:378)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1855)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1792)
+	... 15 more
+Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.determineDialect(DialectFactoryImpl.java:100)
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:54)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:137)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+	... 32 more
+18-09-2020 00:49:40 INFO  Application:55 - Starting Application on DESKTOP-P8M08C6 with PID 5724 (C:\Users\Vyacheslav\IdeaProjects\excelExample\target\classes started by Vyacheslav in C:\Users\Vyacheslav\IdeaProjects\excelExample)
+18-09-2020 00:49:40 INFO  Application:651 - No active profile set, falling back to default profiles: default
+18-09-2020 00:49:40 INFO  RepositoryConfigurationDelegate:393 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18-09-2020 00:49:40 INFO  RepositoryConfigurationDelegate:403 - Finished Spring Data repository scanning in 45ms. Found 2 JPA repository interfaces.
+18-09-2020 00:49:41 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+18-09-2020 00:49:41 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.17.Final
+18-09-2020 00:49:41 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+18-09-2020 00:49:41 INFO  HikariDataSource:386 - HikariPool-1 - Starting...
+18-09-2020 00:49:42 INFO  HikariDataSource:386 - HikariPool-1 - Start completed.
+18-09-2020 00:49:42 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2012Dialect
+18-09-2020 00:49:42 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+18-09-2020 00:49:42 INFO  LocalContainerEntityManagerFactoryBean:416 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+18-09-2020 00:49:43 INFO  Application:61 - Started Application in 4.106 seconds (JVM running for 4.838)
+18-09-2020 00:49:51 ERROR SheetReaderWriter:382 - \\192.168.1.10\Server\Общие папки\Автоматизация\Анализ направлений\Тест123\ВП 2 отделение.xlsx (Системе не удается найти указанный путь)
+18-09-2020 00:50:02 INFO  LocalContainerEntityManagerFactoryBean:598 - Closing JPA EntityManagerFactory for persistence unit 'default'
+18-09-2020 00:50:02 INFO  HikariDataSource:386 - HikariPool-1 - Shutdown initiated...
+18-09-2020 00:50:02 INFO  HikariDataSource:386 - HikariPool-1 - Shutdown completed.
+18-09-2020 00:56:55 INFO  Application:55 - Starting Application on DESKTOP-P8M08C6 with PID 9684 (C:\Users\Vyacheslav\IdeaProjects\excelExample\target\classes started by Vyacheslav in C:\Users\Vyacheslav\IdeaProjects\excelExample)
+18-09-2020 00:56:55 INFO  Application:651 - No active profile set, falling back to default profiles: default
+18-09-2020 00:56:56 INFO  RepositoryConfigurationDelegate:393 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18-09-2020 00:56:56 INFO  RepositoryConfigurationDelegate:403 - Finished Spring Data repository scanning in 48ms. Found 2 JPA repository interfaces.
+18-09-2020 00:56:57 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+18-09-2020 00:56:57 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.17.Final
+18-09-2020 00:56:57 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+18-09-2020 00:56:57 INFO  HikariDataSource:386 - HikariPool-1 - Starting...
+18-09-2020 00:56:57 INFO  HikariDataSource:386 - HikariPool-1 - Start completed.
+18-09-2020 00:56:57 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2012Dialect
+18-09-2020 00:56:58 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+18-09-2020 00:56:58 INFO  LocalContainerEntityManagerFactoryBean:416 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+18-09-2020 00:56:59 INFO  Application:61 - Started Application in 4.2 seconds (JVM running for 4.901)
+18-09-2020 01:32:06 INFO  Application:55 - Starting Application on DESKTOP-P8M08C6 with PID 1452 (C:\Users\Vyacheslav\IdeaProjects\excelExample\target\classes started by Vyacheslav in C:\Users\Vyacheslav\IdeaProjects\excelExample)
+18-09-2020 01:32:06 INFO  Application:651 - No active profile set, falling back to default profiles: default
+18-09-2020 01:32:07 INFO  RepositoryConfigurationDelegate:393 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18-09-2020 01:32:07 INFO  RepositoryConfigurationDelegate:403 - Finished Spring Data repository scanning in 48ms. Found 2 JPA repository interfaces.
+18-09-2020 01:32:07 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+18-09-2020 01:32:07 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.17.Final
+18-09-2020 01:32:08 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+18-09-2020 01:32:08 INFO  HikariDataSource:386 - HikariPool-1 - Starting...
+18-09-2020 01:32:08 INFO  HikariDataSource:386 - HikariPool-1 - Start completed.
+18-09-2020 01:32:08 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2012Dialect
+18-09-2020 01:32:09 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+18-09-2020 01:32:09 INFO  LocalContainerEntityManagerFactoryBean:416 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+18-09-2020 01:32:10 INFO  Application:61 - Started Application in 3.898 seconds (JVM running for 4.547)
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Щербаков Александр Николаевич
+Сумма: 42560.0 Пациентов: 12 Услуг: 12
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - КЛ, Врач: Щербаков Александр Николаевич
+Сумма: 18850.0 Пациентов: 13 Услуг: 4
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - С улицы, Врач: Щербаков Александр Николаевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Романова Татьяна Николаевна
+Сумма: 46888.0 Пациентов: 34 Услуг: 34
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - КЛ, Врач: Романова Татьяна Николаевна
+Сумма: 29220.0 Пациентов: 27 Услуг: 24
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - С улицы, Врач: Романова Татьяна Николаевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Пустовая Гузель Гаязовна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - КЛ, Врач: Пустовая Гузель Гаязовна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - С улицы, Врач: Пустовая Гузель Гаязовна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Шабаев Денис Валерьевич
+Сумма: 6800.0 Пациентов: 6 Услуг: 6
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - КЛ, Врач: Шабаев Денис Валерьевич
+Сумма: 6800.0 Пациентов: 6 Услуг: 6
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - С улицы, Врач: Шабаев Денис Валерьевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Цепелев Лев Викторович
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - КЛ, Врач: Цепелев Лев Викторович
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - С улицы, Врач: Цепелев Лев Викторович
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Буренкова Ольга Анатольевна
+Сумма: 365020.0 Пациентов: 171 Услуг: 171
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - КЛ, Врач: Буренкова Ольга Анатольевна
+Сумма: 207795.0 Пациентов: 157 Услуг: 105
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - С улицы, Врач: Буренкова Ольга Анатольевна
+Сумма: 1200.0 Пациентов: 2 Услуг: 2
+18-09-2020 01:33:44 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Чуприн Максим Николаевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Чуприн Максим Николаевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Чуприн Максим Николаевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Толстокулакова Надежда Владимировна
+Сумма: 4180.0 Пациентов: 4 Услуг: 4
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Толстокулакова Надежда Владимировна
+Сумма: 0.0 Пациентов: 2 Услуг: 2
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Толстокулакова Надежда Владимировна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Свиридов Николай Анатольевич
+Сумма: 41010.0 Пациентов: 26 Услуг: 26
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Свиридов Николай Анатольевич
+Сумма: 19180.0 Пациентов: 16 Услуг: 14
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Свиридов Николай Анатольевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Ли Борис Евгеньевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Ли Борис Евгеньевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Ли Борис Евгеньевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Юферов Тимур Евгеньевич
+Сумма: 4060.0 Пациентов: 3 Услуг: 3
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Юферов Тимур Евгеньевич
+Сумма: 4060.0 Пациентов: 3 Услуг: 3
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Юферов Тимур Евгеньевич
+Сумма: 600.0 Пациентов: 1 Услуг: 1
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Костина Ольга Игоревна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Костина Ольга Игоревна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Костина Ольга Игоревна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Романов Василий Сергеевич
+Сумма: 23060.0 Пациентов: 16 Услуг: 16
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Романов Василий Сергеевич
+Сумма: 15250.0 Пациентов: 13 Услуг: 10
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Романов Василий Сергеевич
+Сумма: 2550.0 Пациентов: 3 Услуг: 3
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Азаренкова Светлана Алексеевна
+Сумма: 34431.0 Пациентов: 29 Услуг: 29
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Азаренкова Светлана Алексеевна
+Сумма: 11195.0 Пациентов: 15 Услуг: 14
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Азаренкова Светлана Алексеевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Коваленко Ольга Александровна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Коваленко Ольга Александровна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Коваленко Ольга Александровна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Дмитриева Елена Александровна
+Сумма: 48863.0 Пациентов: 40 Услуг: 40
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Дмитриева Елена Александровна
+Сумма: 26460.0 Пациентов: 25 Услуг: 23
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Дмитриева Елена Александровна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Матвеева Оксана Иннокентьевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Матвеева Оксана Иннокентьевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Матвеева Оксана Иннокентьевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Захарова Софья Андреевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Захарова Софья Андреевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Захарова Софья Андреевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Денисов Константин Дмитриевич
+Сумма: 20750.0 Пациентов: 12 Услуг: 12
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Денисов Константин Дмитриевич
+Сумма: 17500.0 Пациентов: 13 Услуг: 11
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Денисов Константин Дмитриевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Вяткина Елена Алексеевна
+Сумма: 137821.0 Пациентов: 89 Услуг: 89
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Вяткина Елена Алексеевна
+Сумма: 99740.0 Пациентов: 97 Услуг: 62
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Вяткина Елена Алексеевна
+Сумма: 1200.0 Пациентов: 2 Услуг: 2
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Сангинов Хафизувло Хабибулоевич
+Сумма: 21364.0 Пациентов: 15 Услуг: 15
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Сангинов Хафизувло Хабибулоевич
+Сумма: 18800.0 Пациентов: 15 Услуг: 12
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Сангинов Хафизувло Хабибулоевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Корень Инга Анатольевна
+Сумма: 8800.0 Пациентов: 3 Услуг: 3
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Корень Инга Анатольевна
+Сумма: 1950.0 Пациентов: 3 Услуг: 1
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Корень Инга Анатольевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Берко Ольга Владимировна
+Сумма: 8550.0 Пациентов: 4 Услуг: 4
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - КЛ, Врач: Берко Ольга Владимировна
+Сумма: 3800.0 Пациентов: 4 Услуг: 3
+18-09-2020 01:33:45 INFO  SpecialtyCalc:382 - С улицы, Врач: Берко Ольга Владимировна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:33:46 ERROR SheetReaderWriter:382 - \\192.168.1.10\Server\Общие папки\Автоматизация\Анализ направлений\Тест\ВП 1 отделение.xlsx (Процесс не может получить доступ к файлу, так как этот файл занят другим процессом)
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Щербаков Александр Николаевич
+Сумма: 42560.0 Пациентов: 12 Услуг: 12
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Щербаков Александр Николаевич
+Сумма: 18850.0 Пациентов: 13 Услуг: 4
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Щербаков Александр Николаевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Романова Татьяна Николаевна
+Сумма: 46888.0 Пациентов: 34 Услуг: 34
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Романова Татьяна Николаевна
+Сумма: 29220.0 Пациентов: 27 Услуг: 24
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Романова Татьяна Николаевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Пустовая Гузель Гаязовна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Пустовая Гузель Гаязовна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Пустовая Гузель Гаязовна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Шабаев Денис Валерьевич
+Сумма: 6800.0 Пациентов: 6 Услуг: 6
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Шабаев Денис Валерьевич
+Сумма: 6800.0 Пациентов: 6 Услуг: 6
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Шабаев Денис Валерьевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Цепелев Лев Викторович
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Цепелев Лев Викторович
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Цепелев Лев Викторович
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Буренкова Ольга Анатольевна
+Сумма: 365020.0 Пациентов: 171 Услуг: 171
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Буренкова Ольга Анатольевна
+Сумма: 207795.0 Пациентов: 157 Услуг: 105
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Буренкова Ольга Анатольевна
+Сумма: 1200.0 Пациентов: 2 Услуг: 2
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Чуприн Максим Николаевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Чуприн Максим Николаевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Чуприн Максим Николаевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Толстокулакова Надежда Владимировна
+Сумма: 4180.0 Пациентов: 4 Услуг: 4
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Толстокулакова Надежда Владимировна
+Сумма: 0.0 Пациентов: 2 Услуг: 2
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Толстокулакова Надежда Владимировна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Свиридов Николай Анатольевич
+Сумма: 41010.0 Пациентов: 26 Услуг: 26
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Свиридов Николай Анатольевич
+Сумма: 19180.0 Пациентов: 16 Услуг: 14
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Свиридов Николай Анатольевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Ли Борис Евгеньевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Ли Борис Евгеньевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Ли Борис Евгеньевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Юферов Тимур Евгеньевич
+Сумма: 4060.0 Пациентов: 3 Услуг: 3
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Юферов Тимур Евгеньевич
+Сумма: 4060.0 Пациентов: 3 Услуг: 3
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Юферов Тимур Евгеньевич
+Сумма: 600.0 Пациентов: 1 Услуг: 1
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Костина Ольга Игоревна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Костина Ольга Игоревна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Костина Ольга Игоревна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Романов Василий Сергеевич
+Сумма: 23060.0 Пациентов: 16 Услуг: 16
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Романов Василий Сергеевич
+Сумма: 15250.0 Пациентов: 13 Услуг: 10
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Романов Василий Сергеевич
+Сумма: 2550.0 Пациентов: 3 Услуг: 3
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Азаренкова Светлана Алексеевна
+Сумма: 34431.0 Пациентов: 29 Услуг: 29
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Азаренкова Светлана Алексеевна
+Сумма: 11195.0 Пациентов: 15 Услуг: 14
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Азаренкова Светлана Алексеевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Коваленко Ольга Александровна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Коваленко Ольга Александровна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Коваленко Ольга Александровна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Дмитриева Елена Александровна
+Сумма: 48863.0 Пациентов: 40 Услуг: 40
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Дмитриева Елена Александровна
+Сумма: 26460.0 Пациентов: 25 Услуг: 23
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Дмитриева Елена Александровна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Матвеева Оксана Иннокентьевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - КЛ, Врач: Матвеева Оксана Иннокентьевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:18 INFO  SpecialtyCalc:382 - С улицы, Врач: Матвеева Оксана Иннокентьевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Захарова Софья Андреевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - КЛ, Врач: Захарова Софья Андреевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - С улицы, Врач: Захарова Софья Андреевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Денисов Константин Дмитриевич
+Сумма: 20750.0 Пациентов: 12 Услуг: 12
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - КЛ, Врач: Денисов Константин Дмитриевич
+Сумма: 17500.0 Пациентов: 13 Услуг: 11
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - С улицы, Врач: Денисов Константин Дмитриевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Вяткина Елена Алексеевна
+Сумма: 137821.0 Пациентов: 89 Услуг: 89
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - КЛ, Врач: Вяткина Елена Алексеевна
+Сумма: 99740.0 Пациентов: 97 Услуг: 62
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - С улицы, Врач: Вяткина Елена Алексеевна
+Сумма: 1200.0 Пациентов: 2 Услуг: 2
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Сангинов Хафизувло Хабибулоевич
+Сумма: 21364.0 Пациентов: 15 Услуг: 15
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - КЛ, Врач: Сангинов Хафизувло Хабибулоевич
+Сумма: 18800.0 Пациентов: 15 Услуг: 12
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - С улицы, Врач: Сангинов Хафизувло Хабибулоевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Корень Инга Анатольевна
+Сумма: 8800.0 Пациентов: 3 Услуг: 3
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - КЛ, Врач: Корень Инга Анатольевна
+Сумма: 1950.0 Пациентов: 3 Услуг: 1
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - С улицы, Врач: Корень Инга Анатольевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Берко Ольга Владимировна
+Сумма: 8550.0 Пациентов: 4 Услуг: 4
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - КЛ, Врач: Берко Ольга Владимировна
+Сумма: 3800.0 Пациентов: 4 Услуг: 3
+18-09-2020 01:34:19 INFO  SpecialtyCalc:382 - С улицы, Врач: Берко Ольга Владимировна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:19 ERROR SheetReaderWriter:382 - \\192.168.1.10\Server\Общие папки\Автоматизация\Анализ направлений\Тест\ВП 1 отделение.xlsx (Процесс не может получить доступ к файлу, так как этот файл занят другим процессом)
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Щербаков Александр Николаевич
+Сумма: 42560.0 Пациентов: 12 Услуг: 12
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Щербаков Александр Николаевич
+Сумма: 18850.0 Пациентов: 13 Услуг: 4
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - С улицы, Врач: Щербаков Александр Николаевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Романова Татьяна Николаевна
+Сумма: 46888.0 Пациентов: 34 Услуг: 34
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Романова Татьяна Николаевна
+Сумма: 29220.0 Пациентов: 27 Услуг: 24
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - С улицы, Врач: Романова Татьяна Николаевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Пустовая Гузель Гаязовна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Пустовая Гузель Гаязовна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - С улицы, Врач: Пустовая Гузель Гаязовна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Шабаев Денис Валерьевич
+Сумма: 6800.0 Пациентов: 6 Услуг: 6
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Шабаев Денис Валерьевич
+Сумма: 6800.0 Пациентов: 6 Услуг: 6
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - С улицы, Врач: Шабаев Денис Валерьевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Цепелев Лев Викторович
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Цепелев Лев Викторович
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - С улицы, Врач: Цепелев Лев Викторович
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Буренкова Ольга Анатольевна
+Сумма: 365020.0 Пациентов: 171 Услуг: 171
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Буренкова Ольга Анатольевна
+Сумма: 207795.0 Пациентов: 157 Услуг: 105
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - С улицы, Врач: Буренкова Ольга Анатольевна
+Сумма: 1200.0 Пациентов: 2 Услуг: 2
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Чуприн Максим Николаевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Чуприн Максим Николаевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - С улицы, Врач: Чуприн Максим Николаевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Толстокулакова Надежда Владимировна
+Сумма: 4180.0 Пациентов: 4 Услуг: 4
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Толстокулакова Надежда Владимировна
+Сумма: 0.0 Пациентов: 2 Услуг: 2
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - С улицы, Врач: Толстокулакова Надежда Владимировна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Свиридов Николай Анатольевич
+Сумма: 41010.0 Пациентов: 26 Услуг: 26
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Свиридов Николай Анатольевич
+Сумма: 19180.0 Пациентов: 16 Услуг: 14
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - С улицы, Врач: Свиридов Николай Анатольевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Ли Борис Евгеньевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Ли Борис Евгеньевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - С улицы, Врач: Ли Борис Евгеньевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Юферов Тимур Евгеньевич
+Сумма: 4060.0 Пациентов: 3 Услуг: 3
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Юферов Тимур Евгеньевич
+Сумма: 4060.0 Пациентов: 3 Услуг: 3
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - С улицы, Врач: Юферов Тимур Евгеньевич
+Сумма: 600.0 Пациентов: 1 Услуг: 1
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Костина Ольга Игоревна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Костина Ольга Игоревна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - С улицы, Врач: Костина Ольга Игоревна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Романов Василий Сергеевич
+Сумма: 23060.0 Пациентов: 16 Услуг: 16
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Романов Василий Сергеевич
+Сумма: 15250.0 Пациентов: 13 Услуг: 10
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - С улицы, Врач: Романов Василий Сергеевич
+Сумма: 2550.0 Пациентов: 3 Услуг: 3
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Азаренкова Светлана Алексеевна
+Сумма: 34431.0 Пациентов: 29 Услуг: 29
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Азаренкова Светлана Алексеевна
+Сумма: 11195.0 Пациентов: 15 Услуг: 14
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - С улицы, Врач: Азаренкова Светлана Алексеевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Коваленко Ольга Александровна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:36 INFO  SpecialtyCalc:382 - КЛ, Врач: Коваленко Ольга Александровна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - С улицы, Врач: Коваленко Ольга Александровна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Дмитриева Елена Александровна
+Сумма: 48863.0 Пациентов: 40 Услуг: 40
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - КЛ, Врач: Дмитриева Елена Александровна
+Сумма: 26460.0 Пациентов: 25 Услуг: 23
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - С улицы, Врач: Дмитриева Елена Александровна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Матвеева Оксана Иннокентьевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - КЛ, Врач: Матвеева Оксана Иннокентьевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - С улицы, Врач: Матвеева Оксана Иннокентьевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Захарова Софья Андреевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - КЛ, Врач: Захарова Софья Андреевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - С улицы, Врач: Захарова Софья Андреевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Денисов Константин Дмитриевич
+Сумма: 20750.0 Пациентов: 12 Услуг: 12
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - КЛ, Врач: Денисов Константин Дмитриевич
+Сумма: 17500.0 Пациентов: 13 Услуг: 11
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - С улицы, Врач: Денисов Константин Дмитриевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Вяткина Елена Алексеевна
+Сумма: 137821.0 Пациентов: 89 Услуг: 89
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - КЛ, Врач: Вяткина Елена Алексеевна
+Сумма: 99740.0 Пациентов: 97 Услуг: 62
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - С улицы, Врач: Вяткина Елена Алексеевна
+Сумма: 1200.0 Пациентов: 2 Услуг: 2
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Сангинов Хафизувло Хабибулоевич
+Сумма: 21364.0 Пациентов: 15 Услуг: 15
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - КЛ, Врач: Сангинов Хафизувло Хабибулоевич
+Сумма: 18800.0 Пациентов: 15 Услуг: 12
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - С улицы, Врач: Сангинов Хафизувло Хабибулоевич
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Корень Инга Анатольевна
+Сумма: 8800.0 Пациентов: 3 Услуг: 3
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - КЛ, Врач: Корень Инга Анатольевна
+Сумма: 1950.0 Пациентов: 3 Услуг: 1
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - С улицы, Врач: Корень Инга Анатольевна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - Все КЛ, Врач: Берко Ольга Владимировна
+Сумма: 8550.0 Пациентов: 4 Услуг: 4
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - КЛ, Врач: Берко Ольга Владимировна
+Сумма: 3800.0 Пациентов: 4 Услуг: 3
+18-09-2020 01:34:37 INFO  SpecialtyCalc:382 - С улицы, Врач: Берко Ольга Владимировна
+Сумма: 0.0 Пациентов: 0 Услуг: 0
+18-09-2020 01:37:35 INFO  Application:55 - Starting Application on DESKTOP-P8M08C6 with PID 15392 (C:\Users\Vyacheslav\IdeaProjects\excelExample\target\classes started by Vyacheslav in C:\Users\Vyacheslav\IdeaProjects\excelExample)
+18-09-2020 01:37:35 INFO  Application:651 - No active profile set, falling back to default profiles: default
+18-09-2020 01:37:36 INFO  RepositoryConfigurationDelegate:393 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18-09-2020 01:37:36 INFO  RepositoryConfigurationDelegate:403 - Finished Spring Data repository scanning in 54ms. Found 2 JPA repository interfaces.
+18-09-2020 01:37:37 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+18-09-2020 01:37:37 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.17.Final
+18-09-2020 01:37:37 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+18-09-2020 01:37:37 INFO  HikariDataSource:386 - HikariPool-1 - Starting...
+18-09-2020 01:37:37 INFO  HikariDataSource:386 - HikariPool-1 - Start completed.
+18-09-2020 01:37:37 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2012Dialect
+18-09-2020 01:37:38 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+18-09-2020 01:37:38 INFO  LocalContainerEntityManagerFactoryBean:416 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+18-09-2020 01:37:39 INFO  Application:61 - Started Application in 4.315 seconds (JVM running for 5.434)
+18-09-2020 01:37:40 INFO  LocalContainerEntityManagerFactoryBean:598 - Closing JPA EntityManagerFactory for persistence unit 'default'
+18-09-2020 01:37:40 INFO  HikariDataSource:386 - HikariPool-1 - Shutdown initiated...
+18-09-2020 01:37:40 INFO  HikariDataSource:386 - HikariPool-1 - Shutdown completed.
+18-09-2020 01:37:44 INFO  Application:55 - Starting Application on DESKTOP-P8M08C6 with PID 17360 (C:\Users\Vyacheslav\IdeaProjects\excelExample\target\classes started by Vyacheslav in C:\Users\Vyacheslav\IdeaProjects\excelExample)
+18-09-2020 01:37:44 INFO  Application:651 - No active profile set, falling back to default profiles: default
+18-09-2020 01:37:45 INFO  RepositoryConfigurationDelegate:393 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+18-09-2020 01:37:45 INFO  RepositoryConfigurationDelegate:403 - Finished Spring Data repository scanning in 52ms. Found 2 JPA repository interfaces.
+18-09-2020 01:37:46 INFO  LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: default]
+18-09-2020 01:37:46 INFO  Version:44 - HHH000412: Hibernate ORM core version 5.4.17.Final
+18-09-2020 01:37:46 INFO  Version:49 - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+18-09-2020 01:37:46 INFO  HikariDataSource:386 - HikariPool-1 - Starting...
+18-09-2020 01:37:46 INFO  HikariDataSource:386 - HikariPool-1 - Start completed.
+18-09-2020 01:37:46 INFO  Dialect:172 - HHH000400: Using dialect: org.hibernate.dialect.SQLServer2012Dialect
+18-09-2020 01:37:47 INFO  JtaPlatformInitiator:52 - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+18-09-2020 01:37:47 INFO  LocalContainerEntityManagerFactoryBean:416 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+18-09-2020 01:37:48 INFO  Application:61 - Started Application in 4.186 seconds (JVM running for 4.927)
+18-09-2020 01:37:59 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Щербаков Александр Николаевич| Отделение: 1| Специальность: МАССАЖ
+Сумма: 42560.0| Пациентов: 12| Услуг: 12
+18-09-2020 01:37:59 INFO  SpecialtyCalc:382 - КЛ| Врач: Щербаков Александр Николаевич| Отделение: 1| Специальность: МАССАЖ
+Сумма: 18850.0| Пациентов: 13| Услуг: 4
+18-09-2020 01:37:59 INFO  SpecialtyCalc:382 - С улицы| Врач: Щербаков Александр Николаевич| Отделение: 1| Специальность: МАССАЖ
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:37:59 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Романова Татьяна Николаевна| Отделение: 1| Специальность: Офтальмология
+Сумма: 46888.0| Пациентов: 34| Услуг: 34
+18-09-2020 01:37:59 INFO  SpecialtyCalc:382 - КЛ| Врач: Романова Татьяна Николаевна| Отделение: 1| Специальность: Офтальмология
+Сумма: 29220.0| Пациентов: 27| Услуг: 24
+18-09-2020 01:37:59 INFO  SpecialtyCalc:382 - С улицы| Врач: Романова Татьяна Николаевна| Отделение: 1| Специальность: Офтальмология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:37:59 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Пустовая Гузель Гаязовна| Отделение: 1| Специальность: Офтальмология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:37:59 INFO  SpecialtyCalc:382 - КЛ| Врач: Пустовая Гузель Гаязовна| Отделение: 1| Специальность: Офтальмология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:37:59 INFO  SpecialtyCalc:382 - С улицы| Врач: Пустовая Гузель Гаязовна| Отделение: 1| Специальность: Офтальмология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:37:59 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Шабаев Денис Валерьевич| Отделение: 1| Специальность: Офтальмология
+Сумма: 6800.0| Пациентов: 6| Услуг: 6
+18-09-2020 01:37:59 INFO  SpecialtyCalc:382 - КЛ| Врач: Шабаев Денис Валерьевич| Отделение: 1| Специальность: Офтальмология
+Сумма: 6800.0| Пациентов: 6| Услуг: 6
+18-09-2020 01:37:59 INFO  SpecialtyCalc:382 - С улицы| Врач: Шабаев Денис Валерьевич| Отделение: 1| Специальность: Офтальмология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:37:59 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Цепелев Лев Викторович| Отделение: 1| Специальность: Офтальмология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:37:59 INFO  SpecialtyCalc:382 - КЛ| Врач: Цепелев Лев Викторович| Отделение: 1| Специальность: Офтальмология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Цепелев Лев Викторович| Отделение: 1| Специальность: Офтальмология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Буренкова Ольга Анатольевна| Отделение: 1| Специальность: Терапия+
+Сумма: 365020.0| Пациентов: 171| Услуг: 171
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Буренкова Ольга Анатольевна| Отделение: 1| Специальность: Терапия+
+Сумма: 207795.0| Пациентов: 157| Услуг: 105
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Буренкова Ольга Анатольевна| Отделение: 1| Специальность: Терапия+
+Сумма: 1200.0| Пациентов: 2| Услуг: 2
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Чуприн Максим Николаевич| Отделение: 1| Специальность: Терапия+
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Чуприн Максим Николаевич| Отделение: 1| Специальность: Терапия+
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Чуприн Максим Николаевич| Отделение: 1| Специальность: Терапия+
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Толстокулакова Надежда Владимировна| Отделение: 1| Специальность: Терапия+
+Сумма: 4180.0| Пациентов: 4| Услуг: 4
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Толстокулакова Надежда Владимировна| Отделение: 1| Специальность: Терапия+
+Сумма: 0.0| Пациентов: 2| Услуг: 2
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Толстокулакова Надежда Владимировна| Отделение: 1| Специальность: Терапия+
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Свиридов Николай Анатольевич| Отделение: 1| Специальность: Терапия+
+Сумма: 41010.0| Пациентов: 26| Услуг: 26
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Свиридов Николай Анатольевич| Отделение: 1| Специальность: Терапия+
+Сумма: 19180.0| Пациентов: 16| Услуг: 14
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Свиридов Николай Анатольевич| Отделение: 1| Специальность: Терапия+
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Ли Борис Евгеньевич| Отделение: 1| Специальность: Психиатрия
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Ли Борис Евгеньевич| Отделение: 1| Специальность: Психиатрия
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Ли Борис Евгеньевич| Отделение: 1| Специальность: Психиатрия
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Юферов Тимур Евгеньевич| Отделение: 1| Специальность: Психиатрия
+Сумма: 4060.0| Пациентов: 3| Услуг: 3
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Юферов Тимур Евгеньевич| Отделение: 1| Специальность: Психиатрия
+Сумма: 4060.0| Пациентов: 3| Услуг: 3
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Юферов Тимур Евгеньевич| Отделение: 1| Специальность: Психиатрия
+Сумма: 600.0| Пациентов: 1| Услуг: 1
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Костина Ольга Игоревна| Отделение: 1| Специальность: Педиатрия
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Костина Ольга Игоревна| Отделение: 1| Специальность: Педиатрия
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Костина Ольга Игоревна| Отделение: 1| Специальность: Педиатрия
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Романов Василий Сергеевич| Отделение: 1| Специальность: Педиатрия
+Сумма: 23060.0| Пациентов: 16| Услуг: 16
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Романов Василий Сергеевич| Отделение: 1| Специальность: Педиатрия
+Сумма: 15250.0| Пациентов: 13| Услуг: 10
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Романов Василий Сергеевич| Отделение: 1| Специальность: Педиатрия
+Сумма: 2550.0| Пациентов: 3| Услуг: 3
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Азаренкова Светлана Алексеевна| Отделение: 1| Специальность: Эндокринология
+Сумма: 34431.0| Пациентов: 29| Услуг: 29
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Азаренкова Светлана Алексеевна| Отделение: 1| Специальность: Эндокринология
+Сумма: 11195.0| Пациентов: 15| Услуг: 14
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Азаренкова Светлана Алексеевна| Отделение: 1| Специальность: Эндокринология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Коваленко Ольга Александровна| Отделение: 1| Специальность: Эндокринология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Коваленко Ольга Александровна| Отделение: 1| Специальность: Эндокринология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Коваленко Ольга Александровна| Отделение: 1| Специальность: Эндокринология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Дмитриева Елена Александровна| Отделение: 1| Специальность: Кардиология
+Сумма: 48863.0| Пациентов: 40| Услуг: 40
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Дмитриева Елена Александровна| Отделение: 1| Специальность: Кардиология
+Сумма: 26460.0| Пациентов: 25| Услуг: 23
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Дмитриева Елена Александровна| Отделение: 1| Специальность: Кардиология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Матвеева Оксана Иннокентьевна| Отделение: 1| Специальность: Кардиология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Матвеева Оксана Иннокентьевна| Отделение: 1| Специальность: Кардиология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Матвеева Оксана Иннокентьевна| Отделение: 1| Специальность: Кардиология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Захарова Софья Андреевна| Отделение: 1| Специальность: Кардиология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Захарова Софья Андреевна| Отделение: 1| Специальность: Кардиология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Захарова Софья Андреевна| Отделение: 1| Специальность: Кардиология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Денисов Константин Дмитриевич| Отделение: 1| Специальность: Оториноларингология
+Сумма: 20750.0| Пациентов: 12| Услуг: 12
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Денисов Константин Дмитриевич| Отделение: 1| Специальность: Оториноларингология
+Сумма: 17500.0| Пациентов: 13| Услуг: 11
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Денисов Константин Дмитриевич| Отделение: 1| Специальность: Оториноларингология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Вяткина Елена Алексеевна| Отделение: 1| Специальность: Оториноларингология
+Сумма: 137821.0| Пациентов: 89| Услуг: 89
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Вяткина Елена Алексеевна| Отделение: 1| Специальность: Оториноларингология
+Сумма: 99740.0| Пациентов: 97| Услуг: 62
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Вяткина Елена Алексеевна| Отделение: 1| Специальность: Оториноларингология
+Сумма: 1200.0| Пациентов: 2| Услуг: 2
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Сангинов Хафизувло Хабибулоевич| Отделение: 1| Специальность: Оториноларингология
+Сумма: 21364.0| Пациентов: 15| Услуг: 15
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Сангинов Хафизувло Хабибулоевич| Отделение: 1| Специальность: Оториноларингология
+Сумма: 18800.0| Пациентов: 15| Услуг: 12
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Сангинов Хафизувло Хабибулоевич| Отделение: 1| Специальность: Оториноларингология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Корень Инга Анатольевна| Отделение: 1| Специальность: Оториноларингология
+Сумма: 8800.0| Пациентов: 3| Услуг: 3
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Корень Инга Анатольевна| Отделение: 1| Специальность: Оториноларингология
+Сумма: 1950.0| Пациентов: 3| Услуг: 1
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Корень Инга Анатольевна| Отделение: 1| Специальность: Оториноларингология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - Все КЛ| Врач: Берко Ольга Владимировна| Отделение: 1| Специальность: Аллергология
+Сумма: 8550.0| Пациентов: 4| Услуг: 4
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - КЛ| Врач: Берко Ольга Владимировна| Отделение: 1| Специальность: Аллергология
+Сумма: 3800.0| Пациентов: 4| Услуг: 3
+18-09-2020 01:38:00 INFO  SpecialtyCalc:382 - С улицы| Врач: Берко Ольга Владимировна| Отделение: 1| Специальность: Аллергология
+Сумма: 0.0| Пациентов: 0| Услуг: 0
