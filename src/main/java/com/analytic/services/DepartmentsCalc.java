@@ -37,6 +37,8 @@ public class DepartmentsCalc {
     public List<ExcelLine> getExcelLines(int departmentNumber) {
         List<Doctor> doctors = doctorRepository.findDoctorsByDepartment(departmentNumber);
 
+        doctors.forEach(Doctor::deleteSpaces);
+
         Map<String, Integer> sheets = getSheets(sheetReaderWriter.getSheetsFromExcel("ВП " + departmentNumber + " отделение.xlsx"));
 
         List<ExcelLine> excelLines = new ArrayList<>();
