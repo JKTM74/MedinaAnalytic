@@ -3,6 +3,8 @@ package com.analytic.services;
 
 import com.analytic.connectors.SheetReaderWriter;
 import com.analytic.models.ExcelLine;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -21,7 +23,8 @@ public class Main {
     private final LiFiCalc liFiCalc;
 
     // если меняются отделения, править тут
-    private static final int[] DEPARTMENT_NUMBERS = {1, 2, 3};
+    @Value("${departments}")
+    private int[] DEPARTMENT_NUMBERS;
 
 
     public Main(DepartmentsCalc departmentsCalc, SpecialtyCalc specialtyCalc, SheetReaderWriter sheetReaderWriter, LiFiCalc liFiCalc) {

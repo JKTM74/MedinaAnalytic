@@ -1,6 +1,5 @@
 package com.analytic.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +8,6 @@ import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class Doctor {
@@ -27,4 +25,10 @@ public class Doctor {
 
     @Column(name = "otdel")
     private String department;
+
+    public void deleteSpaces(){
+        if (userFullName != null) {
+            userFullName = userFullName.trim();
+        }
+    }
 }

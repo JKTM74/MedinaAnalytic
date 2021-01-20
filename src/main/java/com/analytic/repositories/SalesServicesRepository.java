@@ -31,12 +31,29 @@ public interface SalesServicesRepository extends JpaRepository<SalesServices, UU
     /**
      * @param user - врач
      * @param date
+     * @return Курс(выполненные) по врачу и дате
+     */
+    @Query(value = "SELECT iif(max(ID) IS NULL, 0, max(ID)) AS ID, count(id) AS servicesCount, iif(sum(Price2) IS NULL, 0, sum(Price2)) AS sumPrice, COUNT(DISTINCT(PatientID)) AS patientsCount\n" +
+            "FROM tblSalesServices \n" +
+            "WHERE FORMAT(SurveyDate, 'MM-yyyy') = :date AND \n" +
+            "Doctor LIKE '%' + :user + '%' AND \n" +
+            "Service NOT IN (Select Service FROM tblServicePayExeption) AND \n" +
+            "course = 1 AND \n" +
+            "(Napr NOT LIKE '%' + :user + '%' OR Napr IS NULL) AND \n" +
+            "(Sert <> 'ЗП' OR Sert IS NULL)  AND \n" +
+            "(Service NOT LIKE '%УЗИ%' OR Service IS NULL) AND \n" +
+            "(Service NOT LIKE '%справ%' OR Service IS NULL)", nativeQuery = true)
+    SalesServices getServicesByOtherDoctors(@Param("user") String user, @Param("date") String date);
+
+    /**
+     * @param user - врач
+     * @param date
      * @return Курс(направленные) по врачу и дате
      */
     @Query(value = "SELECT iif(max(ID) IS NULL, 0, max(ID)) AS ID, count(id) AS servicesCount, iif(sum(Price2) IS NULL, 0, sum(Price2)) AS sumPrice, COUNT(DISTINCT(PatientID)) AS patientsCount\n" +
             "FROM tblSalesServices \n" +
             "WHERE FORMAT(SurveyDate, 'MM-yyyy') = :date AND \n" +
-            "(Doctor NOT LIKE '%' + :user + '%' OR Doctor IS NULL) AND \n" +
+            "(Doctor NOT LIKE '%' + :user + '%' or Doctor is null) AND \n" +
             "Service NOT IN (Select Service FROM tblServicePayExeption) AND \n" +
             "course = 1 AND \n" +
             "Napr LIKE '%' + :user + '%' AND \n" +
@@ -76,6 +93,21 @@ public interface SalesServicesRepository extends JpaRepository<SalesServices, UU
             "Napr LIKE '%' + :user + '%' AND \n" +
             "Service LIKE '%УЗИ%'", nativeQuery = true)
     SalesServices getPersonalUziServices(@Param("user") String user, @Param("date") String date);
+
+    /**
+     * @param user - врач
+     * @param date
+     * @return Курс(выполненные) по врачу и дате
+     */
+    @Query(value = "SELECT iif(max(ID) IS NULL, 0, max(ID)) AS ID, count(id) AS servicesCount, iif(sum(Price2) IS NULL, 0, sum(Price2)) AS sumPrice, COUNT(DISTINCT(PatientID)) AS patientsCount\n" +
+            "FROM tblSalesServices \n" +
+            "WHERE FORMAT(SurveyDate, 'MM-yyyy') = :date AND \n" +
+            "Doctor LIKE '%' + :user + '%' AND \n" +
+            "Service NOT IN (Select Service FROM tblServicePayExeption) AND \n" +
+            "course = 1 AND \n" +
+            "Napr NOT LIKE '%' + :user + '%' AND \n" +
+            "Service LIKE '%УЗИ%'", nativeQuery = true)
+    SalesServices getUziServicesByOtherDoctors(@Param("user") String user, @Param("date") String date);
 
     /**
      * @param user - врач

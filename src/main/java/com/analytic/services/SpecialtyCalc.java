@@ -4,6 +4,7 @@ import com.analytic.models.Doctor;
 import com.analytic.models.ExcelLine;
 import com.analytic.models.SalesServices;
 import com.analytic.repositories.SalesServicesRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -12,6 +13,7 @@ import java.util.Date;
 /**
  * Расчет специальности.
  */
+@Slf4j
 @Service
 public class SpecialtyCalc {
     private final SalesServicesRepository salesServicesRepository;
@@ -55,12 +57,14 @@ public class SpecialtyCalc {
     private void calcAllKl(Doctor doctor, ExcelLine excelLine) {
         SalesServices personalServices = salesServicesRepository.getPersonalServices(doctor.getUserFullName(), date);
         SalesServices directedServices = salesServicesRepository.getDirectedServices(doctor.getUserFullName(), date);
+        SalesServices servicesByOtherDoctors = salesServicesRepository.getServicesByOtherDoctors(doctor.getUserFullName(), date);
 
-        int patientsCount = personalServices.getPatientsCount() + directedServices.getPatientsCount();
-        int servicesCount = personalServices.getServicesCount() + directedServices.getServicesCount();
-        double allKlSum = personalServices.getSumPrice() + directedServices.getSumPrice();
+        int patientsCount = personalServices.getPatientsCount() + directedServices.getPatientsCount() + servicesByOtherDoctors.getPatientsCount();
+        int servicesCount = personalServices.getServicesCount() + directedServices.getServicesCount() + servicesByOtherDoctors.getServicesCount();
+        double allKlSum = personalServices.getSumPrice() + directedServices.getSumPrice() + servicesByOtherDoctors.getSumPrice();
 
         excelLine.setAllKLVars(patientsCount, servicesCount, allKlSum);
+        logInfo(doctor, allKlSum, patientsCount, patientsCount, "Все КЛ");
     }
 
     /**
@@ -74,6 +78,8 @@ public class SpecialtyCalc {
         SalesServices personalServices = salesServicesRepository.getPersonalServices(doctor.getUserFullName(), date);
 
         excelLine.setKLVars(personalServices.getPatientsCount(), personalServices.getServicesCount(), personalServices.getSumPrice());
+
+        logInfo(doctor, personalServices.getSumPrice(), personalServices.getServicesCount(), personalServices.getPatientsCount(), "КЛ");
     }
 
     /**
@@ -87,6 +93,8 @@ public class SpecialtyCalc {
         SalesServices streetServices = salesServicesRepository.getStreetServices(doctor.getUserFullName(), date);
 
         excelLine.setStreetVars(streetServices.getPatientsCount(), streetServices.getServicesCount(), streetServices.getSumPrice());
+
+        logInfo(doctor, streetServices.getSumPrice(), streetServices.getServicesCount(), streetServices.getPatientsCount(), "С улицы" );
     }
 
     /**
@@ -99,12 +107,16 @@ public class SpecialtyCalc {
     private void calcUziAll(Doctor doctor, ExcelLine excelLine) {
         SalesServices personalUziServices = salesServicesRepository.getPersonalUziServices(doctor.getUserFullName(), date);
         SalesServices directedUziServices = salesServicesRepository.getDirectedUziServices(doctor.getUserFullName(), date);
+        SalesServices uziServicesByOtherDoctors = salesServicesRepository.getUziServicesByOtherDoctors(doctor.getUserFullName(), date);
 
-        int patientsCount = personalUziServices.getPatientsCount() + directedUziServices.getPatientsCount();
-        int servicesCount = personalUziServices.getServicesCount() + directedUziServices.getServicesCount();
-        double allKlSum = personalUziServices.getSumPrice() + directedUziServices.getSumPrice();
+        int patientsCount = personalUziServices.getPatientsCount() + directedUziServices.getPatientsCount() + uziServicesByOtherDoctors.getPatientsCount();
+        int servicesCount = personalUziServices.getServicesCount() + directedUziServices.getServicesCount() + uziServicesByOtherDoctors.getServicesCount();
+        double allKlSum = personalUziServices.getSumPrice() + directedUziServices.getSumPrice() + uziServicesByOtherDoctors.getSumPrice();
 
         excelLine.setAllKLVars(patientsCount, servicesCount, allKlSum);
+
+        logInfo(doctor, allKlSum, servicesCount, patientsCount, "Узи все КЛ");
+
     }
 
     /**
@@ -118,6 +130,8 @@ public class SpecialtyCalc {
         SalesServices personalUziServices = salesServicesRepository.getPersonalUziServices(doctor.getUserFullName(), date);
 
         excelLine.setKLVars(personalUziServices.getPatientsCount(), personalUziServices.getServicesCount(), personalUziServices.getSumPrice());
+
+        logInfo(doctor, personalUziServices.getSumPrice(), personalUziServices.getServicesCount(), personalUziServices.getPatientsCount(), "Узи КЛ");
     }
 
     /**
@@ -131,6 +145,7 @@ public class SpecialtyCalc {
         SalesServices streetServices = salesServicesRepository.getStreetUziServices(doctor.getUserFullName(), date);
 
         excelLine.setStreetVars(streetServices.getPatientsCount(), streetServices.getServicesCount(), streetServices.getSumPrice());
+        logInfo(doctor, streetServices.getSumPrice(), streetServices.getServicesCount(), streetServices.getPatientsCount(), "Узи с улицы");
     }
 
     /**
@@ -140,5 +155,10 @@ public class SpecialtyCalc {
      */
     public void setDate(Date date) {
         this.date = new SimpleDateFormat("MM-yyyy").format(date);
+    }
+
+    private void logInfo(Doctor doctor, Double sum, int patientsCount, int servicesCount, String type){
+        log.info(type  + " | Врач: " + doctor.getUserFullName() + " | Отделение: " + doctor.getDepartment() + " | Специальность: " + doctor.getSpecialty() +
+                "\nСумма: " + sum + " | Пациентов: " + patientsCount + " | Услуг: " + servicesCount);
     }
 }
